@@ -1,0 +1,24 @@
+﻿@model Article
+@{
+    ViewBag._Title = "Edit Article";
+}
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <th>Id</th>
+            <td>@Model.Id</td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td>@Html.TextBoxFor(x => x.Title)</td>
+        </tr>
+        <tr>
+            <th>Modified</th>
+            <td>@Html.TextBoxFor(x => x.Modified)</td>
+        </tr>
+    </table>
+    <button type="submit">Save</button>
+    <button type="button" onclick="window.location='/article'">Cancel</button>
+    <button type="submit" name="_action" value="Delete">Delete</button>
+}

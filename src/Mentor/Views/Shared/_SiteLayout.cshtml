@@ -8,7 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag._Title</title>
 </head>
-<body id="site">
-    @RenderBody()
-</body>
+    <body id="site">
+        <h1>@ViewBag._Title</h1>
+        <ul>
+            <li><a href="/article">Articles</a></li>
+        </ul>
+        @RenderBody()
+    </body>
 </html>
