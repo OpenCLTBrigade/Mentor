@@ -1,6 +1,7 @@
 <%@ Application Language="C#" %>
 <%@ Import Namespace="System.Web.Mvc" %>
 <%@ Import Namespace="System.Web.Routing" %>
+<%@ Import Namespace="System.Web.Optimization" %>
 <script RunAt="server">
     void Application_Start(Object sender, EventArgs args)
     {
@@ -13,7 +14,7 @@
         routes.MapRoute(
             name: "Default",
             url: "{controller}/{action}/{id}",
-            defaults: new {controller = "Home", action = "Index", id = UrlParameter.Optional}
+            defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
     }
 </script>
