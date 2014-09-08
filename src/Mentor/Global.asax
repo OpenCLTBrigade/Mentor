@@ -2,9 +2,14 @@
 <%@ Import Namespace="System.Web.Mvc" %>
 <%@ Import Namespace="System.Web.Routing" %>
 <%@ Import Namespace="System.Web.Optimization" %>
+
 <script RunAt="server">
     void Application_Start(Object sender, EventArgs args)
     {
+        Console.WriteLine(sender);
+        Console.WriteLine(args);
+        Console.WriteLine("Application_Start called");
+        
         RegisterRoutes(RouteTable.Routes);
         RegisterBundles(BundleTable.Bundles);
     }
