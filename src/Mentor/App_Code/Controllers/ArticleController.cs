@@ -8,7 +8,7 @@ public class ArticleController : Controller
     {
         using (var db = new MentorDb())
         {
-            var model = db.Articles.ToList();
+            var model = db.Articles.ToList<Article>();
             return View(model);
         }
     }
