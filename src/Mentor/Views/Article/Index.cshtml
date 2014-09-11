@@ -2,28 +2,32 @@
 @{
     ViewBag._Title = "List Articles";
 }
-<p>
-    <a href="/article/edit">Create New Article</a>
-</p>
+<div>
+    <p>
+        <a href="/article/edit">Create New Article</a>
+    </p>
 
-<table border="1">
-    <thead>
-        <tr>
-            <th>&nbsp;</th>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Modified</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var a in Model)
-        {
-            <tr>
-                <th><a href="/article/edit/@a.Id">Edit</a></th>
-                <td>@a.Id</td>
-                <td>@a.Title</td>
-                <td>@a.Modified</td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Modified</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var a in Model)
+                {
+                    <tr>
+                        <th><a href="/article/edit/@a.Id">Edit</a></th>
+                        <td>@a.Id</td>
+                        <td>@a.Title</td>
+                        <td>@a.Modified</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
