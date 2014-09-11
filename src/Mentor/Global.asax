@@ -24,7 +24,7 @@
     {
         bundles.Add(new StyleBundle("~/content/css/bootstrap").Include(
             "~/content/bootstrap.min.css",
-            "~/content/bootstrap-theme.min.css"));
+            "~/content/dashboard.css"));
         
         bundles.Add(new ScriptBundle("~/scripts/bootstrap").Include(
             "~/Scripts/jquery-2.1.1.min.js",
