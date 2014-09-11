@@ -1,13 +1,14 @@
 ﻿@{
     Layout = null;
 }
+@using System.Web.Optimization
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag._Title</title>
-    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    @Styles.Render("~/content/css/bootstrap")
 </head>
 <body id="site">
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -29,7 +30,6 @@
         @RenderBody()
     </div>
 
-    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    @Scripts.Render("~/scripts/bootstrap")
 </body>
 </html>

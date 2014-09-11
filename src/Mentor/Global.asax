@@ -6,10 +6,6 @@
 <script RunAt="server">
     void Application_Start(Object sender, EventArgs args)
     {
-        Console.WriteLine(sender);
-        Console.WriteLine(args);
-        Console.WriteLine("Application_Start called");
-        
         RegisterRoutes(RouteTable.Routes);
         RegisterBundles(BundleTable.Bundles);
     }
@@ -29,5 +25,9 @@
         bundles.Add(new StyleBundle("~/content/css/bootstrap").Include(
             "~/content/bootstrap.min.css",
             "~/content/bootstrap-theme.min.css"));
+        
+        bundles.Add(new ScriptBundle("~/scripts/bootstrap").Include(
+            "~/Scripts/jquery-2.1.1.min.js",
+            "~/Scripts/bootstrap.min.js"));
     }
 </script>
