@@ -1,18 +1,19 @@
 ﻿@{
     Layout = null;
 }
+@using System.Web.Optimization
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag._Title</title>
-    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    @Styles.Render("~/content/css/bootstrap")
 </head>
 <body id="site">
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
+        <div class="container-fluid">
+            <div class="navbar-brand">
                <a href="~/">Mentors</a>
             </div>
             <div class="navbar-collapse">
@@ -25,11 +26,22 @@
         </div>
     </div>
 
-    <div class="container">
-        @RenderBody()
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li class="active"><a href="#">Big Brothers Big Sisters</a></li>
+                    <li><a href="#">United Way</a></li>
+                    <li><a href="#">Non-MMA Agency</a></li>
+                </ul>
+            </div>
+
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                @RenderBody()
+            </div>
+        </div>
     </div>
 
-    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    @Scripts.Render("~/scripts/bootstrap")
 </body>
 </html>
