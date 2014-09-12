@@ -13,9 +13,9 @@
 x64/
 build/
 bld/
-[Bb]in/
+**/[Bb]in/*.dll
+**/[Bb]in/*.xml
 [Oo]bj/
-![Bb]in/*.refresh
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
