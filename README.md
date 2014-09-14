@@ -18,3 +18,4 @@ Admin role
 * Manage agencies (list, edit, activate)
 * Manage form data (list, view)
 * Manage content pages (list, edit)
+* Mange home page
