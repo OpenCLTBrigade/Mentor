@@ -17,7 +17,7 @@ public class MentorDb : DbContext
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {
         modelBuilder.Types().Configure(c => c.ToTable(c.ClrType.Name));
-        modelBuilder.Properties<DateTime>().Configure(c => c.HasColumnType("datetime2"));
+        //modelBuilder.Properties<DateTime>().Configure(c => c.HasColumnType("datetime2"));
         modelBuilder.Properties<string>().Configure(c => c.IsUnicode(false));
     }
 

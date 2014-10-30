@@ -4,9 +4,9 @@
 }
 @using (Html.BeginForm())
 {
-    <table>
+    <table class="table">
         <tr>
-            <th>Id</th>
+            <th>ID</th>
             <td>@Model.Id</td>
         </tr>
         <tr>
@@ -18,7 +18,7 @@
             <td>@Html.TextBoxFor(x => x.Modified)</td>
         </tr>
     </table>
-    <button type="submit">Save</button>
-    <button type="button" onclick="window.location='/article'">Cancel</button>
-    <button type="submit" name="_action" value="Delete">Delete</button>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-default" onclick="window.location='/article'">Cancel</button>
+    <button type="submit" class="btn btn-default" name="_action" value="Delete">Delete</button>
 }
