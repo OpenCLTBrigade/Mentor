@@ -13,17 +13,15 @@
     {
         routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-        routes.MapRoute(
-            name: "Home",
-            url: "{action}",
-            defaults: new { controller = "Home", action = "Index" }
-            );
+        routes.MapRoute("Home",
+            url: "{action}/{id}",
+            defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+        );
 
-        routes.MapRoute(
-            name: "Default",
+        routes.MapRoute("Default",
             url: "{controller}/{action}/{id}",
             defaults: new { action = "Index", id = UrlParameter.Optional }
-            );
+        );
     }
 
     private static void RegisterBundles(BundleCollection bundles)

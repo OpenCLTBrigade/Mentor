@@ -42,11 +42,6 @@ namespace Mentor
         {
             Entry(entity).State = EntityState.Deleted;
         }
-
-        public void Commit()
-        {
-            SaveChanges();
-        }
     };
 
     internal sealed class MentorDbMigrationConfiguration : DbMigrationsConfiguration<MentorDb>

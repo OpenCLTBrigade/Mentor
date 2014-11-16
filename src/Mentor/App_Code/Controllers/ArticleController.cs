@@ -42,7 +42,7 @@ namespace Mentor
                 {
                     TryUpdateModel(model);
                 }
-                db.Commit();
+                db.SaveChanges();
             }
             return RedirectToAction("Index");
         }

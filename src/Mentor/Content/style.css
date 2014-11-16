@@ -23,4 +23,5 @@ a:hover { text-decoration: underline; }
 }
 
 .main { padding-top: 0; }
+.bar { display:block; margin:1em auto; width:959px; }
 .disclaimer { color:gray; font-size: 12px; }

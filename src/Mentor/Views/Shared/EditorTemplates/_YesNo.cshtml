@@ -1,0 +1,18 @@
+﻿@model bool?
+@{
+    var dict = new Dictionary<string, string>
+        {
+            { Boolean.TrueString, "Yes" },
+            { Boolean.FalseString, "No" },
+        };
+
+    var value = !Model.HasValue ? string.Empty
+                : Model.Value ? Boolean.TrueString
+                : Boolean.FalseString;
+
+    var attrs = (IDictionary<string, object>)ViewData["htmlAttributes"] ?? new RouteValueDictionary();
+    attrs.AddClass("radio-inline");
+    var list = dict.ToSelectList(false, value);
+}
+
+@Html.RadioList("", list, null, attrs)

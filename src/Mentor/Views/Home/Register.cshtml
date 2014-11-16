@@ -1,0 +1,101 @@
+﻿@model Agency
+@{
+    ViewBag._Title = "Register";
+}
+<div>
+    <h1 class="page-header">@ViewBag._Title</h1>
+    <p><i>If you are registering an agency that has multiple campuses/locations, each location will require a separate registration so as to be properly displayed when geographically searched.</i></p>
+    <form role="form" method="POST">
+        <div class='form-group'>
+            <label>Organization Name:</label>
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+        </div>
+        <div class='form-group'>
+            <label>@Html.LabelFor(x => x.ProgramName) (if different than above):</label>
+            @Html.TextBoxFor(x => x.ProgramName, new { @class = "form-control" })
+        </div>
+        <div class='form-group'>
+            <label>@Html.LabelFor(x => x.Address):</label>
+            @Html.TextBoxFor(x => x.Address, new { @class = "form-control" })
+        </div>
+        <div class='form-group'>
+            <label>@Html.LabelFor(x => x.City):</label>
+            @Html.TextBoxFor(x => x.City, new { @class = "form-control" })
+        </div>
+        <div class='form-group'>
+            <label>@Html.LabelFor(x => x.State):</label>
+            @Html.EditorFor(x => x.State)
+        </div>
+        <div class='form-group'>
+            <label>@Html.LabelFor(x => x.ZipCode):</label>
+            @Html.TextBoxFor(x => x.ZipCode, new { @class = "form-control" })
+        </div>
+        <div class='form-group'>
+            <label>@Html.LabelFor(x => x.Phone):</label>
+            @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
+        </div>
+        <div class='form-group'>
+            <label>@Html.LabelFor(x => x.Website):</label>
+            @Html.TextBoxFor(x => x.Website, new { @class = "form-control" })
+        </div>
+        <div class='form-group'>
+            <label>@Html.LabelFor(x => x.MissionStatement) (200-word max.):</label>
+            @Html.TextAreaFor(x => x.MissionStatement, new { @class = "form-control", rows = 4 })
+            <div><i>Please be sure to describe the population(s) your agency works work, any specialties you have, what your organization stands for.  In a snapshot, what do you do?  The language provided will allow users of this site to search by keyword to find your agency.</i></div>
+        </div>
+        <fieldset>
+            <legend>Primary Program Contact</legend>
+            <div class='form-group'>
+                <label>@Html.LabelFor(x => x.ContactFirstName):</label>
+                @Html.TextBoxFor(x => x.ContactFirstName, new { @class = "form-control" })
+            </div>
+            <div class='form-group'>
+                <label>@Html.LabelFor(x => x.ContactLastName):</label>
+                @Html.TextBoxFor(x => x.ContactLastName, new { @class = "form-control" })
+            </div>
+            <div class='form-group'>
+                <label>@Html.LabelFor(x => x.ContactTitle):</label>
+                @Html.TextBoxFor(x => x.ContactTitle, new { @class = "form-control" })
+            </div>
+            <div class='form-group'>
+                <label>@Html.LabelFor(x => x.ContactPhone):</label>
+                @Html.TextBoxFor(x => x.ContactPhone, new { @class = "form-control" })
+            </div>
+            <div class='form-group'>
+                <label>@Html.LabelFor(x => x.ContactEmail):</label>
+                @Html.TextBoxFor(x => x.ContactEmail, new { @class = "form-control" })
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Primary Recruitment and Referral Staff (if different than above)</legend>
+            <div class='form-group'>
+                <label>@Html.LabelFor(x => x.ReferralFirstName):</label>
+                @Html.TextBoxFor(x => x.ContactFirstName, new { @class = "form-control" })
+            </div>
+            <div class='form-group'>
+                <label>@Html.LabelFor(x => x.ReferralLastName):</label>
+                @Html.TextBoxFor(x => x.ContactLastName, new { @class = "form-control" })
+            </div>
+            <div class='form-group'>
+                <label>@Html.LabelFor(x => x.ReferralTitle):</label>
+                @Html.TextBoxFor(x => x.ContactTitle, new { @class = "form-control" })
+            </div>
+            <div class='form-group'>
+                <label>@Html.LabelFor(x => x.ReferralPhone):</label>
+                @Html.TextBoxFor(x => x.ContactPhone, new { @class = "form-control" })
+            </div>
+            <div class='form-group'>
+                <label>@Html.LabelFor(x => x.ReferralEmail):</label>
+                @Html.TextBoxFor(x => x.ContactEmail, new { @class = "form-control" })
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Program Details </legend>
+            <div class='form-group'>
+                <label>Are you a @Html.LabelFor(x => x.IsNonProfit)?</label>
+                @Html.EditorFor(x => x.IsNonProfit)
+            </div>
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Submit Registration</button>
+    </form>
+</div>
