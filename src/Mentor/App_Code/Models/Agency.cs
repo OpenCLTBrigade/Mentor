@@ -75,6 +75,26 @@ namespace Mentor
 
         public bool? IsNonProfit { get; set; }
 
+        public int? FullTimeStaffCount { get; set; }
+
+        public int? PartTimeStaffCount { get; set; }
+
+        public int? UnpaidStaffCount { get; set; }
+
+        public int? MentorCount { get; set; }
+
+        public int? MenteeCount { get; set; }
+
+        public int? MenteeWaitingListCount { get; set; }
+
+        public decimal? MentorScreeningFee { get; set; }
+
+        public string MentorCompensation { get; set; }
+
+        public bool? HasTimelyResponse { get; set; }
+
+        public bool? HasInterestInMma { get; set; }
+
         public virtual ICollection<AgencyCode> Codes { get; set; }
     };
 }
