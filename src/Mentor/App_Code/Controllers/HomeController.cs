@@ -1,9 +1,12 @@
 ﻿using System.Web.Mvc;
 
-public class HomeController : Controller
+namespace Mentor
 {
-    public ActionResult Index()
+    public class HomeController : Controller
     {
-        return View();
-    }
-};
+        public ActionResult Index()
+        {
+            return View();
+        }
+    };
+}
