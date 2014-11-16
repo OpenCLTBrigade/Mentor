@@ -1,0 +1,61 @@
+﻿@model List<Code>
+@{
+    var type = Request.QueryString["Type"];
+    ViewBag.Title = type == null ? "List Codes" : "Edit " + type;
+}
+
+@if (type == null)
+{
+    <form method="GET">
+        @Html.DropDownList("Type", (SelectList)ViewBag.Types)
+        <button type='submit'>Load Values</button>
+    </form>
+    <form method="GET">
+        @Html.TextBox("Type")
+        <button type='submit'>Create New Type</button>
+    </form>
+}
+else
+{
+    <form method='post'>
+        <div class="table-responsive">
+            <table class='table table-condensed table-striped table-hover'>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Type</th>
+                        <th>Value</th>
+                        <th>Label</th>
+                        <th>Seq</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < Model.Count; i++)
+                    {
+                        var m = Model[i];
+                        <tr>
+                            <td>@m.Id @Html.Hidden("Codes[" + i + "].Id", m.Id)</td>
+                            <td>@m.Type @Html.Hidden("Codes[" + i + "].Type", m.Type)</td>
+                            <td>@Html.TextBox("Codes[" + i + "].Value", m.Value, new { size = 40 })</td>
+                            <td>@Html.TextBox("Codes[" + i + "].Label", m.Label, new { size = 50 })</td>
+                            <td>@Html.TextBox("Codes[" + i + "].Seq", m.Seq, new { size = 3 })</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>New</td>
+                        <td>@type @Html.Hidden("Codes[" + Model.Count + "].Type", type)</td>
+                        <td>@Html.TextBox("Codes[" + Model.Count + "].Value", null, new { size = 40 })</td>
+                        <td>@Html.TextBox("Codes[" + Model.Count + "].Label", null, new { size = 50 })</td>
+                        <td>@Html.TextBox("Codes[" + Model.Count + "].Seq", null, new { size = 3 })</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class='form-group'>
+            <button type='submit' class='btn btn-primary'><span class='glyphicon glyphicon-floppy-disk'></span> Save Values</button>
+            <button type='button' onclick='window.location="/codes"' class='btn btn-default'><span class='glyphicon glyphicon-list'></span> Cancel</button>
+        </div>
+    </form>
+}

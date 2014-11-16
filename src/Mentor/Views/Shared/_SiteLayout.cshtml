@@ -20,13 +20,13 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="/search">Find a Program</a>
+                        @Html.ActionLink("Find a Program", "Search", "Home")
                     </li>
                     <li>
-                        <a href="/faq">FAQ</a>
+                        @Html.ActionLink("FAQ", "Faq", "Home")
                     </li>
                     <li>
-                        <a href="/login">Agency Login</a>
+                        @Html.ActionLink("Agency Login", "Login", "Home")
                     </li>
                 </ul>
             </div>
@@ -39,8 +39,15 @@
                 <!-- Spacer for logo -->
                 <div style="float:left;width:100px;height:50px;">&nbsp;</div>
                 <div id="title">MENTOR CHARLOTTE</div>
+                @if (Request.IsAuthenticated)
+                {
+                    @Html.ActionLink("Codes", "Index", "Code")
+                }
                 <div class="clearfix">
                     @RenderBody()
+                </div>
+                <div>
+                    @User.Identity.Name
                 </div>
                 <img src="/Content/images/bar.jpg" class="bar" />
                 <div class="disclaimer">

@@ -25,11 +25,16 @@ namespace Mentor
         public DbSet<Agency> Agencies { get; set; }
         public DbSet<AgencyCode> AgencyCodes { get; set; }
         public DbSet<Article> Articles { get; set; }
+        public DbSet<Code> Codes { get; set; }
         public DbSet<User> Users { get; set; }
 
-        public void Save<T>(T entity) where T : class
+        public T Save<T>(T entity, bool isNew = false) where T : class
         {
+            if (isNew)
+                return Add(entity);
+
             Entry(entity).State = EntityState.Modified;
+            return entity;
         }
 
         public T Add<T>(T entity) where T : class
