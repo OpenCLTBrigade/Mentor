@@ -1,6 +1,22 @@
-﻿@model dynamic
+﻿@model User
 @{
     ViewBag._Title = "Login";
 }
 <h1 class="page-header">@ViewBag._Title</h1>
+
+@Html.ValidationSummary((string)ViewBag.ErrorMessage)
+<form method='post' role='form' class='form-horizontal'>
+    <div>
+        <div class="form-group">
+            <label>Username</label>
+            @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </div>
+</form>
+
 <p>Don't have a login yet? @Html.ActionLink("Register your agency.", "Register")</p>

@@ -12,6 +12,7 @@ namespace Mentor
         [Required]
         [EmailAddress]
         [StringLength(75)]
+        [Index("IX_User_Email", IsUnique = true)]
         public string Email { get; set; }
 
         [Required]

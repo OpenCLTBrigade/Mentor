@@ -1,4 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Mentor
 {
@@ -14,8 +17,21 @@ namespace Mentor
             return View();
         }
 
-        public ActionResult Login()
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        public ActionResult Login(string email, string password)
         {
+            if (Request.HttpMethod == "POST")
+            {
+                using (var db = new MentorDb())
+                {
+                    var user = db.Users.Single(x => x.Email == email);
+                    if (!user.Active || user.Password != password)
+                        throw new ApplicationException("Invalid login");
+
+                    FormsAuthentication.SetAuthCookie(user.Email, true);
+                    return RedirectToAction("Index");
+                }
+            }
             return View();
         }
 

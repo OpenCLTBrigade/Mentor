@@ -54,12 +54,11 @@ namespace Mentor
 
         protected override void Seed(MentorDb context)
         {
-            //context.Logins.AddOrUpdate(
-            //    x => x.Email,
-            //    new[]
-            //    {
-            //        new Login {Email = "paul@tagovi.com", Password = "pw", IsActive = true},
-            //    });
+            context.Users.AddOrUpdate(x => x.Email,
+                new[]
+                {
+                    new User {Email = "paul@tagovi.com", Password = "pw", Active = true},
+                });
         }
     };
 }
