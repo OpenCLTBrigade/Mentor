@@ -1,9 +1,10 @@
 ﻿@model List<Code>
 @{
     var type = Request.QueryString["Type"];
-    ViewBag.Title = type == null ? "List Codes" : "Edit " + type;
+    ViewBag._Title = type == null ? "List Codes" : "Edit " + type;
 }
 
+<h1 class="page-header">@ViewBag._Title</h1>
 @if (type == null)
 {
     <form method="GET">
