@@ -93,7 +93,104 @@
             <legend>Program Details </legend>
             <div class='form-group'>
                 <label>Are you a @Html.LabelFor(x => x.IsNonProfit)?</label>
-                @Html.EditorFor(x => x.IsNonProfit)
+                <div>@Html.EditorFor(x => x.IsNonProfit)</div>
+            </div>
+            <div class="form-group">
+                <label>Select the model(s) that best describe your program:</label>
+                @Html.Editor("ProgramType", "_CodeMultiSelect", new { Model.Id, Type = "Agency.ProgramType" })
+            </div>
+            <div class="form-group">
+                <label>Where do mentor-mentee pairs meet within your program?</label>
+                @Html.Editor("MeetingLocation", "_CodeMultiSelect", new { Model.Id, Type = "Agency.MeetingLocation" })
+                @Html.TextBoxFor(x => x.MeetingLocationOther, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>In which section of metro Charlotte does your program operate?</label>
+                @Html.Editor("MetroSection", "_CodeMultiSelect", new { Model.Id, Type = "Agency.MetroSection" })
+            </div>
+            <div class="form-group">
+                <label>Age of mentors within your program:</label>
+                @Html.Editor("MentorAge", "_CodeMultiSelect", new { Model.Id, Type = "Agency.MentorAge" })
+            </div>
+            <div class="form-group">
+                <label>Age of youth served by your program:</label>
+                @Html.Editor("MenteeAge", "_CodeMultiSelect", new { Model.Id, Type = "Agency.MenteeAge" })
+            </div>
+            <div class="form-group">
+                <label>Gender of youth served by your program:</label>
+                @Html.Editor("MenteeGender", "_CodeMultiSelect", new { Model.Id, Type = "Agency.MenteeGender" })
+            </div>
+            <div class="form-group">
+                <label>Method of youth referral:</label>
+                @Html.Editor("ReferralMethod", "_CodeMultiSelect", new { Model.Id, Type = "Agency.ReferralMethod" })
+                @Html.TextBoxFor(x => x.ReferralMethodOther, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Expected length of commitment for youth and mentors:</label>
+                @Html.Editor("ExpectedCommitment", "_CodeSingleSelect", new { Model.Id, Type = "Agency.ExpectedCommitment" })
+            </div>
+            <div class="form-group">
+                <label>Expected frequency of mentoring activities:</label>
+                @Html.Editor("MentoringFrequency", "_CodeSingleSelect", new { Model.Id, Type = "Agency.MentoringFrequency" })
+            </div>
+            <div class="form-group">
+                <label>How much time is spent in each session?</label>
+                @Html.Editor("SessionLength", "_CodeSingleSelect", new { Model.Id, Type = "Agency.SessionLength" })
+            </div>
+            <div class="form-group">
+                <label>How long has your program been in existence?</label>
+                @Html.Editor("ProgramExistence", "_CodeSingleSelect", new { Model.Id, Type = "Agency.ProgramExistence" })
+            </div>
+            <div class="form-group">
+                <label>Please provide your staff count:</label>
+                <div>@Html.TextBoxFor(x => x.FullTimeStaffCount, new { size = 4 }) Full-Time</div>
+                <div>@Html.TextBoxFor(x => x.PartTimeStaffCount, new { size = 4 }) Part-Time</div>
+                <div>@Html.TextBoxFor(x => x.UnpaidStaffCount, new { size = 4 }) Unpaid</div>
+            </div>
+            <div class="form-group">
+                <label>Please indicate your current active counts of:</label>
+                <div>Mentors: @Html.TextBoxFor(x => x.MentorCount, new { size = 4 })</div>
+                <div>Mentees: @Html.TextBoxFor(x => x.MenteeCount, new { size = 4 })</div>
+            </div>
+            <div class="form-group">
+                <label>Select the youth intake process components:</label>
+                @Html.Editor("MenteeIntake", "_CodeMultiSelect", new { Model.Id, Type = "Agency.MenteeIntake" })
+                @Html.TextBoxFor(x => x.MenteeIntakeOther, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Please select the mentor screening process components:</label>
+                @Html.Editor("MentorScreening", "_CodeMultiSelect", new { Model.Id, Type = "Agency.MentorScreening" })
+                @Html.TextBoxFor(x => x.MentorScreeningOther, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Describe the mentor training provided (select all that apply)</label>
+                @Html.Editor("MentorTraining", "_CodeMultiSelect", new { Model.Id, Type = "Agency.MentorTraining" })
+                @Html.TextBoxFor(x => x.MentorTrainingOther, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Does the program have a mentee waiting list?
+                    <br/>If yes, list the number of mentees currently waiting</label>
+                @Html.TextBoxFor(x => x.MenteeWaitingListCount, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Is there an application or screening fee for mentors?
+                    <br/>If yes, please enter that amount</label>
+                @Html.TextBoxFor(x => x.MentorScreeningFee, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Does your mentoring program provide financial compensation for its mentors?
+                    <br/>If yes, please describe</label>
+                @Html.TextBoxFor(x => x.MentorCompensation, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>If selected, will your agency be able to provide a timely response to potential mentors (defined as within 3 business days)?</label>
+                <div>@Html.EditorFor(x => x.HasTimelyResponse)</div>
+            </div>
+            <div class="form-group">
+                <label>Are you interested in being a member of the Mayor's Mentoring Alliance? 
+                    <i>Please visit the link <a href="#">here</a> to learn more about the Alliance. 
+                    A member of the Alliance Board will contact you to discuss your candidacy.</i></label>
+                <div>@Html.EditorFor(x => x.HasInterestInMma)</div>
             </div>
         </fieldset>
         <button type="submit" class="btn btn-primary">Submit Registration</button>

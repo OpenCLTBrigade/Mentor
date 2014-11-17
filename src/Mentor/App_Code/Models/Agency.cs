@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace Mentor
 {
@@ -95,6 +96,89 @@ namespace Mentor
         [UIHint("_YesNo")]
         public bool? IsNonProfit { get; set; }
 
+        [NotMapped]
+        public string[] ProgramType
+        {
+            get { return null; }
+            set { SetCodes("ProgramType", value.Select(int.Parse).ToList()); }
+        }
+
+        [NotMapped]
+        public string[] MeetingLocation
+        {
+            get { return null; }
+            set { SetCodes("MeetingLocation", value.Select(int.Parse).ToList()); }
+        }
+
+        [StringLength(100)]
+        public string MeetingLocationOther { get; set; }
+
+        [NotMapped]
+        public string[] MetroSection
+        {
+            get { return null; }
+            set { SetCodes("MetroSection", value.Select(int.Parse).ToList()); }
+        }
+
+        [NotMapped]
+        public string[] MentorAge
+        {
+            get { return null; }
+            set { SetCodes("MentorAge", value.Select(int.Parse).ToList()); }
+        }
+
+        [NotMapped]
+        public string[] MenteeAge
+        {
+            get { return null; }
+            set { SetCodes("MenteeAge", value.Select(int.Parse).ToList()); }
+        }
+
+        [NotMapped]
+        public string[] MenteeGender
+        {
+            get { return null; }
+            set { SetCodes("MenteeGender", value.Select(int.Parse).ToList()); }
+        }
+
+        [NotMapped]
+        public string[] ReferralMethod
+        {
+            get { return null; }
+            set { SetCodes("ReferralMethod", value.Select(int.Parse).ToList()); }
+        }
+
+        [StringLength(100)]
+        public string ReferralMethodOther { get; set; }
+
+        [NotMapped]
+        public string[] ExpectedCommitment
+        {
+            get { return null; }
+            set { SetCodes("ExpectedCommitment", value.Select(int.Parse).ToList()); }
+        }
+
+        [NotMapped]
+        public string[] MentoringFrequency
+        {
+            get { return null; }
+            set { SetCodes("MentoringFrequency", value.Select(int.Parse).ToList()); }
+        }
+
+        [NotMapped]
+        public string[] SessionLength
+        {
+            get { return null; }
+            set { SetCodes("SessionLength", value.Select(int.Parse).ToList()); }
+        }
+
+        [NotMapped]
+        public string[] ProgramExistence
+        {
+            get { return null; }
+            set { SetCodes("ProgramExistence", value.Select(int.Parse).ToList()); }
+        }
+
         public int? FullTimeStaffCount { get; set; }
 
         public int? PartTimeStaffCount { get; set; }
@@ -105,6 +189,36 @@ namespace Mentor
 
         public int? MenteeCount { get; set; }
 
+        [NotMapped]
+        public string[] MenteeIntake
+        {
+            get { return null; }
+            set { SetCodes("MenteeIntake", value.Select(int.Parse).ToList()); }
+        }
+
+        [StringLength(100)]
+        public string MenteeIntakeOther { get; set; }
+
+        [NotMapped]
+        public string[] MentorScreening
+        {
+            get { return null; }
+            set { SetCodes("MentorScreening", value.Select(int.Parse).ToList()); }
+        }
+
+        [StringLength(100)]
+        public string MentorScreeningOther { get; set; }
+
+        [NotMapped]
+        public string[] MentorTraining
+        {
+            get { return null; }
+            set { SetCodes("MentorTraining", value.Select(int.Parse).ToList()); }
+        }
+
+        [StringLength(100)]
+        public string MentorTrainingOther { get; set; }
+
         public int? MenteeWaitingListCount { get; set; }
 
         public decimal? MentorScreeningFee { get; set; }
@@ -112,10 +226,35 @@ namespace Mentor
         [MaxLength]
         public string MentorCompensation { get; set; }
 
+        [UIHint("_YesNo")]
         public bool? HasTimelyResponse { get; set; }
 
+        [UIHint("_YesNo")]
         public bool? HasInterestInMma { get; set; }
 
         public virtual ICollection<AgencyCode> Codes { get; set; }
+
+        public void SetCodes(string type, ICollection<int> ids)
+        {
+            var existing = Codes.Where(x => x.CodeType == type).ToList();
+
+            //add new codes
+            foreach (var id in ids)
+            {
+                if (existing.Any(x => x.CodeId == id))
+                    continue;
+
+                Codes.Add(new AgencyCode { CodeType = type, CodeId = id });
+            }
+
+            //remove old codes
+            foreach (var code in new List<AgencyCode>(existing))
+            {
+                if (ids.Any(x => x == code.CodeId))
+                    continue;
+
+                Codes.Remove(code);
+            }
+        }
     };
 }

@@ -1,0 +1,29 @@
+﻿@{
+    var id = (int) ViewData["Id"];
+    var field = ViewData.TemplateInfo.HtmlFieldPrefix;
+    var type = (string)ViewData["Type"];
+    var active = Request.IsAuthenticated;
+    using (var db = new MentorDb())
+    {
+        var selected = db.AgencyCodes
+                         .Where(x => x.AgencyId == id && x.CodeType == field)
+                         .Select(x => x.CodeId)
+                         .Distinct()
+                         .ToList();
+            
+        var codes = db.Codes
+                      .Where(x => x.Type == type)
+                      .Where(x => active || x.Seq >= 0)
+                      .OrderBy(x => x.Seq)
+                      .ThenBy(x => x.Value)
+                      .Select(x => new SelectListItem
+                      {
+                          Value = x.Id.ToString(),
+                          Text = x.Label ?? x.Value,
+                          Selected = selected.Contains(x.Id),
+                      })
+                      .ToList();
+        
+        @Html.MultiSelect("", codes)
+    }
+}

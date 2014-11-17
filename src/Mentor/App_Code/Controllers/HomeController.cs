@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -36,11 +37,11 @@ namespace Mentor
         }
 
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        public ActionResult Register(int? id)
+        public ActionResult Register(int? id, FormCollection form)
         {
             using (var db = new MentorDb())
             {
-                var agency = id.HasValue ? db.Agencies.Find(id.Value) : new Agency();
+                var agency = id.HasValue ? db.Agencies.Include(x => x.Codes).Single(x => x.Id == id) : new Agency();
 
                 if (Request.HttpMethod == "POST")
                 {
@@ -58,5 +59,26 @@ namespace Mentor
         {
             return View();
         }
+
+        //[Authorize]
+        //public ActionResult Temp()
+        //{
+        //    var sb = new System.Text.StringBuilder();
+        //    foreach (var code in new MentorDb().Codes)
+        //    {
+        //        sb.AppendFormat("new Code {{ Id={0}, Type=\"{1}\", Value=\"{2}\", Label=\"{3}\", Seq={4} }},\r\n",
+        //            code.Id, code.Type, code.Value, code.Label, code.Seq);
+        //    }
+        //    return Content(sb.ToString(), "text/plain");
+        //}
+
+        //[Authorize]
+        //public ActionResult Migrate()
+        //{
+        //    var configuration = new MentorDbMigrationConfiguration();
+        //    var migrator = new DbMigrator(configuration);
+        //    migrator.Update();
+        //    return Content("Migrated", "text/plain");
+        //}
     };
 }

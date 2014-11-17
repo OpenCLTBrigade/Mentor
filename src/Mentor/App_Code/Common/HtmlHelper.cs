@@ -47,6 +47,58 @@ namespace Common
             return MvcHtmlString.Create(sb.ToString());
         }
 
+        public static MvcHtmlString MultiSelect(this HtmlHelper htmlHelper, string name, IEnumerable<SelectListItem> items, IDictionary<string, object> htmlAttributes = null)
+        {
+            var fullName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
+
+            var sb = new StringBuilder();
+            foreach (var item in items)
+            {
+                var label = new TagBuilder("label");
+                //label.MergeAttributes(htmlAttributes);
+
+                var checkbox = new TagBuilder("input");
+                checkbox.MergeAttribute("name", fullName, true);
+                checkbox.MergeAttribute("type", "checkbox");
+                checkbox.MergeAttribute("value", item.Value);
+                //checkbox.MergeAttributes(htmlAttributes);
+
+                if (item.Selected)
+                    checkbox.MergeAttribute("checked", "checked");
+
+                label.InnerHtml = checkbox.ToString(TagRenderMode.SelfClosing) + " " + item.Text;
+                sb.AppendLine("<div class='checkbox'>" + label.ToString(TagRenderMode.Normal) + "</div>");
+            }
+
+            return MvcHtmlString.Create(sb.ToString());
+        }
+
+        public static MvcHtmlString SingleSelect(this HtmlHelper htmlHelper, string name, IEnumerable<SelectListItem> items, IDictionary<string, object> htmlAttributes = null)
+        {
+            var fullName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
+
+            var sb = new StringBuilder();
+            foreach (var item in items)
+            {
+                var label = new TagBuilder("label");
+                //label.MergeAttributes(htmlAttributes);
+
+                var checkbox = new TagBuilder("input");
+                checkbox.MergeAttribute("name", fullName, true);
+                checkbox.MergeAttribute("type", "radio");
+                checkbox.MergeAttribute("value", item.Value);
+                //checkbox.MergeAttributes(htmlAttributes);
+
+                if (item.Selected)
+                    checkbox.MergeAttribute("checked", "checked");
+
+                label.InnerHtml = checkbox.ToString(TagRenderMode.SelfClosing) + " " + item.Text;
+                sb.AppendLine("<div class='radio'>" + label.ToString(TagRenderMode.Normal) + "</div>");
+            }
+
+            return MvcHtmlString.Create(sb.ToString());
+        }
+
         public static IEnumerable<SelectListItem> ToSelectList(this IEnumerable<string> items, bool blank = false, params string[] selected)
         {
             var list = new List<SelectListItem>();

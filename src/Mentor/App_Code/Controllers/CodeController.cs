@@ -38,7 +38,7 @@ namespace Mentor
 
                 ViewBag.Types = new SelectList(types, type);
 
-                return View(model);
+                return View("ManageCodes", model);
             }
         }
     };
