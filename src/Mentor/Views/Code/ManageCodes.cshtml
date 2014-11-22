@@ -55,8 +55,8 @@ else
             </table>
         </div>
         <div class='form-group'>
-            <button type='submit' class='btn btn-primary'><span class='glyphicon glyphicon-floppy-disk'></span> Save Values</button>
-            <button type='button' onclick='window.location="/Code"' class='btn btn-default'><span class='glyphicon glyphicon-list'></span> Cancel</button>
+            @Html.SubmitButton("Save Codes", new { @class = "btn btn-primary" })
+            @Html.LinkButton("Cancel", Url.Action("ManageCodes"), new { @class = "btn btn-default" })
         </div>
     </form>
 }

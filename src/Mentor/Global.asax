@@ -2,14 +2,30 @@
 <%@ Import Namespace="System.Web.Mvc" %>
 <%@ Import Namespace="System.Web.Routing" %>
 <%@ Import Namespace="System.Web.Optimization" %>
+<%@ Import Namespace="Mentor" %>
+<%@ Import Namespace="SimpleInjector" %>
+<%@ Import Namespace="SimpleInjector.Integration.Web.Mvc" %>
 
 <script RunAt="server">
     void Application_Start(Object sender, EventArgs args)
     {
-        RegisterRoutes(RouteTable.Routes);
-        RegisterBundles(BundleTable.Bundles);
+        ConfigureContainer();
+        ConfigureRoutes(RouteTable.Routes);
+        ConfigureBundles(BundleTable.Bundles);
     }
-    private static void RegisterRoutes(RouteCollection routes)
+
+    private static void ConfigureContainer()
+    {
+        var container = new Container();
+        container.RegisterMvcControllers(typeof(HomeController).Assembly);
+        container.RegisterMvcIntegratedFilterProvider();
+        container.RegisterPerWebRequest<MentorDb>();
+        container.Verify();
+
+        DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
+    }
+
+    private static void ConfigureRoutes(RouteCollection routes)
     {
         routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
@@ -19,7 +35,7 @@
         );
     }
 
-    private static void RegisterBundles(BundleCollection bundles)
+    private static void ConfigureBundles(BundleCollection bundles)
     {
         bundles.Add(new StyleBundle("~/content/css/bootstrap").Include(
             "~/content/bootstrap.min.css",

@@ -1,13 +1,19 @@
-﻿using System;
-using System.Data.Entity;
-using System.Linq;
-using System.Web.Mvc;
-using System.Web.Security;
+﻿using System.Web.Mvc;
+using Common;
 
 namespace Mentor
 {
     public class HomeController : Controller
     {
+        private readonly AgencyService _agencies;
+        private readonly UserService _users;
+
+        public HomeController(AgencyService agencyService, UserService userService)
+        {
+            _agencies = agencyService;
+            _users = userService;
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -21,17 +27,10 @@ namespace Mentor
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult Login(string email, string password)
         {
-            if (Request.HttpMethod == "POST")
+            if (Request.IsPost())
             {
-                using (var db = new MentorDb())
-                {
-                    var user = db.Users.Single(x => x.Email == email);
-                    if (!user.Active || user.Password != password)
-                        throw new ApplicationException("Invalid login");
-
-                    FormsAuthentication.SetAuthCookie(user.Email, true);
-                    return RedirectToAction("Index");
-                }
+                _users.Login(email, password);
+                return RedirectToAction("Index");
             }
             return View();
         }
@@ -39,28 +38,22 @@ namespace Mentor
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult Logout()
         {
-            Session.Abandon();
-            FormsAuthentication.SignOut();
+            _users.Logout();
             return RedirectToAction("Index");
         }
 
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult Register(int? id)
         {
-            using (var db = new MentorDb())
+            var agency = _agencies.Find(id) ?? _agencies.Create();
+            if (Request.IsPost())
             {
-                var agency = id.HasValue ? db.Agencies.Include(x => x.Codes).Single(x => x.Id == id) : new Agency();
+                TryUpdateModel(agency);
+                _agencies.Save(agency);
+                return Content("Registration successful " + agency.Id);
 
-                if (Request.HttpMethod == "POST")
-                {
-                    TryUpdateModel(agency);
-                    if (agency.IsNew) db.Add(agency);
-                    db.SaveChanges();
-                    return Content("Registration successful " + agency.Id);
-
-                }
-                return View(agency);
             }
+            return View(agency);
         }
 
         public ActionResult Search()

@@ -1,43 +1,36 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Common;
 
 namespace Mentor
 {
     public class CodeController : Controller
     {
-        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        public ActionResult Index(string type, List<Code> codes)
+        private readonly CodeService _codes;
+
+        public CodeController(CodeService codeService)
         {
-            using (var db = new MentorDb())
+            _codes = codeService;
+        }
+
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        public ActionResult ManageCodes(string type, List<Code> codes)
+        {
+            if (string.IsNullOrWhiteSpace(type))
             {
-                if (Request.HttpMethod == "POST")
-                {
-                    foreach (var code in codes)
-                    {
-                        if (string.IsNullOrWhiteSpace(code.Value))
-                            continue;
-
-                        db.Save(code, code.Id == 0);
-                    }
-                    db.SaveChanges();
-                    return RedirectToAction("Index", "Code", new {type});
-                }
-
-                var types = db.Codes
-                              .OrderBy(x => x.Type)
-                              .Select(x => x.Type)
-                              .Distinct()
-                              .ToList();
-
-                var model = db.Codes
-                              .Where(x => x.Type == type)
-                              .OrderBy(x => x.Seq)
-                              .ThenBy(x => x.Value)
-                              .ToList();
-
+                var types = _codes.GetTypes();
                 ViewBag.Types = new SelectList(types, type);
-
+                return View("ManageCodes");
+            }
+            else if (Request.IsPost())
+            {
+                codes.ForEach(_codes.Save);
+                return RedirectToAction("ManageCodes", new { type });
+            }
+            else
+            {
+                var model = _codes.Query(type).ToList();
                 return View("ManageCodes", model);
             }
         }

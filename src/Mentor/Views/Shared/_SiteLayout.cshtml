@@ -41,7 +41,8 @@
                 <div id="title">MENTOR CHARLOTTE</div>
                 @if (Request.IsAuthenticated)
                 {
-                    @Html.ActionLink("Codes", "Index", "Code") @:| @Html.ActionLink("Agencies", "ListAgencies", "Agency")
+                    @Html.ActionLink("Codes", "ManageCodes", "Code")
+                    @:| @Html.ActionLink("Agencies", "ListAgencies", "Agency")
                 }
                 <div class="clearfix">
                     @RenderBody()

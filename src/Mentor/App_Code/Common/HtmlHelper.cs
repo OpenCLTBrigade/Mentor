@@ -190,5 +190,10 @@ namespace Common
 
             return dict;
         }
+
+        public static bool IsPost(this HttpRequestBase request)
+        {
+            return request.HttpMethod == "POST";
+        }
     };
 }

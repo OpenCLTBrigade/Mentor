@@ -30,5 +30,7 @@ namespace Mentor
         [MaxLength]
         public string Data { get; set; }
 
+        [NotMapped]
+        public bool IsNew { get { return Id == 0; } }
     };
 }
