@@ -38,12 +38,12 @@
     private static void ConfigureBundles(BundleCollection bundles)
     {
         bundles.Add(new StyleBundle("~/content/css/bootstrap").Include(
-            "~/content/bootstrap.min.css",
-            "~/content/dashboard.css",
-            "~/content/style.css"));
+            "~/Content/bootstrap/bootstrap.min.css",
+            "~/Content/dashboard.css",
+            "~/Content/style.css"));
 
         bundles.Add(new ScriptBundle("~/scripts/bootstrap").Include(
-            "~/Scripts/jquery-2.1.1.min.js",
-            "~/Scripts/bootstrap.min.js"));
+            "~/Content/jquery/jquery-2.1.1.min.js",
+            "~/Content/bootstrap/bootstrap.min.js"));
     }
 </script>

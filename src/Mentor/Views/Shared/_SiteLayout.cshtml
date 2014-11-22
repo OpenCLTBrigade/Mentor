@@ -41,8 +41,12 @@
                 <div id="title">MENTOR CHARLOTTE</div>
                 @if (Request.IsAuthenticated)
                 {
-                    @Html.ActionLink("Codes", "ManageCodes", "Code")
-                    @:| @Html.ActionLink("Agencies", "ListAgencies", "Agency")
+                    <nav class="navbar navbar-default" role="navigation">
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Codes", "ManageCodes", "Code")</li>
+                            <li>@Html.ActionLink("Agencies", "ListAgencies", "Agency")</li>
+                        </ul>
+                    </nav>
                 }
                 <div class="clearfix">
                     @RenderBody()

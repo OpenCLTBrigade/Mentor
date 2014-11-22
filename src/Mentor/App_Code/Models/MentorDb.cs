@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
 using System.Linq;
+using Common;
 
 namespace Mentor
 {
@@ -23,6 +24,7 @@ namespace Mentor
             modelBuilder.Types().Configure(c => c.ToTable(c.ClrType.Name));
             //modelBuilder.Properties<DateTime>().Configure(c => c.HasColumnType("datetime2"));
             modelBuilder.Properties<string>().Configure(c => c.IsUnicode(false));
+            modelBuilder.Conventions.Add(new DecimalPrecisionAttributeConvention());
         }
 
         public DbSet<Agency> Agencies { get; set; }

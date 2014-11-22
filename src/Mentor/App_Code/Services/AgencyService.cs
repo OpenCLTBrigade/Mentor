@@ -19,7 +19,8 @@ namespace Mentor
 
         public IQueryable<Agency> Query()
         {
-            return _db.Agencies;
+            return _db.Agencies
+                      .OrderBy(x => x.Name);
         }
 
         public Agency Find(int? id)

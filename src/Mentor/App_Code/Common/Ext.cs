@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 
 namespace Common
 {
@@ -25,6 +27,14 @@ namespace Common
                 return str;
 
             return str.Substring(0, len) + append;
+        }
+
+        public static void Merge(this IDictionary<string, object> dict, NameValueCollection form)
+        {
+            foreach (string key in form)
+            {
+                dict[key] = form[key];
+            }
         }
     };
 }

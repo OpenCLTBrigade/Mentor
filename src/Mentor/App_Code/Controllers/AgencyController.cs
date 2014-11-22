@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using Common;
 
@@ -49,6 +50,16 @@ namespace Mentor
                 _agencies.Import(file.InputStream);
             }
             return RedirectToAction("ListAgencies");
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Geocode(int id, decimal latitude, decimal longitude)
+        {
+            var agency = _agencies.Find(id);
+            agency.Latitude = latitude;
+            agency.Longitude = longitude;
+            _agencies.Save(agency);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     };
 }

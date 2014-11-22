@@ -1,0 +1,11 @@
+﻿@model Agency
+@{
+    ViewBag._Title = Model.Name;
+}
+<div>
+    <h1 class="page-header">@Model.Name</h1>
+    <div>@Model.Address</div>
+    <div>@Model.City, @Model.State @Model.ZipCode</div>
+    <div>@Model.Phone</div>
+    <div><a href="@Model.Website" target="_blank">@Model.Website</a></div>
+</div>

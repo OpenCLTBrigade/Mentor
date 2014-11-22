@@ -1,15 +1,24 @@
 ﻿@{
-    var id = (int) ViewData["Id"];
+    var selected = new List<int>();
+    var id = (int?) ViewData["Id"];
     var field = ViewData.TemplateInfo.HtmlFieldPrefix;
     var type = (string)ViewData["Type"];
+    var value = (string) ViewData["Value"];
+    if (value != null)
+    {
+        selected = value.Split(',').Select(int.Parse).ToList();
+    }
     var active = Request.IsAuthenticated;
     using (var db = new MentorDb())
     {
-        var selected = db.AgencyCodes
+        if (id != null)
+        {
+            selected = db.AgencyCodes
                          .Where(x => x.AgencyId == id && x.CodeType == field)
                          .Select(x => x.CodeId)
                          .Distinct()
                          .ToList();
+        }
             
         var codes = db.Codes
                       .Where(x => x.Type == type)

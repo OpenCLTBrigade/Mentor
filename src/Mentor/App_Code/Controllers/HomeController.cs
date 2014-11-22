@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Common;
 
 namespace Mentor
@@ -17,6 +18,12 @@ namespace Mentor
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult Agency(int id)
+        {
+            var agency = _agencies.Find(id);
+            return View(agency);
         }
 
         public ActionResult Faq()
@@ -58,7 +65,9 @@ namespace Mentor
 
         public ActionResult Search()
         {
-            return View();
+            ViewData.Merge(Request.QueryString);
+            var agencies = _agencies.Query().ToList();
+            return View(agencies);
         }
 
         //[Authorize]

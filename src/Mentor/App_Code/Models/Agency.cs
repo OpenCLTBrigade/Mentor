@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using Common;
 
 namespace Mentor
 {
@@ -12,6 +13,7 @@ namespace Mentor
         public Agency()
         {
             Codes = new HashSet<AgencyCode>();
+            Users = new HashSet<User>();
         }
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -95,6 +97,12 @@ namespace Mentor
         [DisplayName("501c3 organization")]
         [UIHint("_YesNo")]
         public bool? IsNonProfit { get; set; }
+
+        [DecimalPrecision(9, 6)]
+        public decimal? Latitude { get; set; }
+
+        [DecimalPrecision(9, 6)]
+        public decimal? Longitude { get; set; }
 
         [NotMapped]
         public string[] ProgramType
@@ -236,6 +244,8 @@ namespace Mentor
         public bool IsNew { get { return Id == 0; } }
 
         public virtual ICollection<AgencyCode> Codes { get; set; }
+
+        public virtual ICollection<User> Users { get; set; }
 
         public string[] GetCodes(string type)
         {
