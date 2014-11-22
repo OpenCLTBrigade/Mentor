@@ -237,6 +237,13 @@ namespace Mentor
 
         public virtual ICollection<AgencyCode> Codes { get; set; }
 
+        public string[] GetCodes(string type)
+        {
+            return Codes.Where(x => x.CodeType == type)
+                        .Select(x => x.CodeId.ToString())
+                        .ToArray();
+        }
+
         public void SetCodes(string type, ICollection<int> ids)
         {
             var existing = Codes.Where(x => x.CodeType == type).ToList();

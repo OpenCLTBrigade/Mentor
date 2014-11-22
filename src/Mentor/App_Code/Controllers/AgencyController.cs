@@ -32,5 +32,23 @@ namespace Mentor
             }
             return View(agency);
         }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public ActionResult Delete(int? id)
+        {
+            _agencies.Delete(id);
+            return RedirectToAction("ListAgencies");
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult ImportAgencies()
+        {
+            var file = Request.Files["InputFile"];
+            if (file != null && file.InputStream != null && file.ContentLength > 0)
+            {
+                _agencies.Import(file.InputStream);
+            }
+            return RedirectToAction("ListAgencies");
+        }
     };
 }

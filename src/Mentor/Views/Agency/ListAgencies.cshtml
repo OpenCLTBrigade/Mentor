@@ -3,11 +3,20 @@
     ViewBag._Title = "List Agencies";
 }
 <h1 class="page-header">@ViewBag._Title</h1>
+<div class="form-group">
+    <form method="POST" enctype="multipart/form-data" action="@Url.Action("ImportAgencies")">
+        @Html.ActionLink("Add Agency", "EditAgency", null, new { @class = "btn btn-primary" })
+        | <input type="file" name="InputFile" style="display:inline-block;" />
+        @Html.SubmitButton("Import Agencies (xlsx)", new { @class = "btn btn-default" })
+    </form>
+</div>
 <table class="table table-bordered table-hover table-striped">
     <thead>
         <tr>
             <th>Id</th>
             <th>Name</th>
+            <th>Phone</th>
+            <th>Website</th>
         </tr>
     </thead>
     <tbody>
@@ -16,6 +25,8 @@
             <tr>
                 <td>@Html.ActionLink("Edit " + agency.Id, "EditAgency", new { agency.Id })</td>
                 <td>@agency.Name</td>
+                <td>@agency.Phone</td>
+                <td><a href="@agency.Website">@agency.Website.Left(40, "...")</a></td>
             </tr>
         }
     </tbody>

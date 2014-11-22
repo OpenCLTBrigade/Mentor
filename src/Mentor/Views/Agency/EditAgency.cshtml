@@ -205,6 +205,7 @@
         <div class="form-group">
             @Html.SubmitButton("Save Agency", new { @class = "btn btn-primary" })
             @Html.LinkButton("Cancel", Url.Action("ListAgencies"), new { @class = "btn btn-default" })
+            @Html.LinkButton("Delete", Url.Action("Delete", new{Model.Id}), new { @class = "btn btn-default confirm" })
         </div>
     </form>
 </div>

@@ -1,5 +1,7 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Data.Entity.Validation;
 using System.Linq;
 
 namespace Mentor
@@ -57,7 +59,15 @@ namespace Mentor
                 AgencyCodes.Remove((AgencyCode)orphanedAgencyCode.Entity);
             }
 
-            return base.SaveChanges();
+            try
+            {
+                return base.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                var errors = ex.EntityValidationErrors.SelectMany(x => x.ValidationErrors.Select(y => y.ErrorMessage));
+                throw new ApplicationException("Validation Error: " + string.Join("; ", errors), ex);
+            }
         }
     };
 
