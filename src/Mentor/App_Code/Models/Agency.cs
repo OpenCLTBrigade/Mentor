@@ -232,6 +232,9 @@ namespace Mentor
         [UIHint("_YesNo")]
         public bool? HasInterestInMma { get; set; }
 
+        [NotMapped]
+        public bool IsNew { get { return Id == 0; } }
+
         public virtual ICollection<AgencyCode> Codes { get; set; }
 
         public void SetCodes(string type, ICollection<int> ids)

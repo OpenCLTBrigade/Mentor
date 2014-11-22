@@ -37,7 +37,15 @@ namespace Mentor
         }
 
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        public ActionResult Register(int? id, FormCollection form)
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index");
+        }
+
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        public ActionResult Register(int? id)
         {
             using (var db = new MentorDb())
             {
@@ -46,7 +54,7 @@ namespace Mentor
                 if (Request.HttpMethod == "POST")
                 {
                     TryUpdateModel(agency);
-                    if (agency.Id == 0) db.Add(agency);
+                    if (agency.IsNew) db.Add(agency);
                     db.SaveChanges();
                     return Content("Registration successful " + agency.Id);
 

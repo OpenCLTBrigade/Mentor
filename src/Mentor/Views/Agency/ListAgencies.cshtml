@@ -1,0 +1,22 @@
+﻿@model List<Agency>
+@{
+    ViewBag._Title = "List Agencies";
+}
+<h1 class="page-header">@ViewBag._Title</h1>
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var agency in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink("Edit " + agency.Id, "EditAgency", new { agency.Id })</td>
+                <td>@agency.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>

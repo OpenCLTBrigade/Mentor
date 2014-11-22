@@ -13,6 +13,7 @@ namespace Mentor
         public int Id { get; set; }
 
         [Index("IX_AgencyCode_AgencyTypeCode", IsUnique = true, Order = 1)]
+        [ForeignKey("Agency")]
         public int AgencyId { get; set; }
 
         [Index("IX_AgencyCode_AgencyTypeCode", IsUnique = true, Order = 2)]
@@ -20,6 +21,7 @@ namespace Mentor
         public string CodeType { get; set; }
 
         [Index("IX_AgencyCode_AgencyTypeCode", IsUnique = true, Order = 3)]
+        [ForeignKey("Code")]
         public int CodeId { get; set; }
 
         public virtual Agency Agency { get; set; }

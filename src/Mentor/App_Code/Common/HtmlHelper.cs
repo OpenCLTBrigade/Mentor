@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace Common
 {
@@ -47,7 +48,26 @@ namespace Common
             return MvcHtmlString.Create(sb.ToString());
         }
 
-        public static MvcHtmlString MultiSelect(this HtmlHelper htmlHelper, string name, IEnumerable<SelectListItem> items, IDictionary<string, object> htmlAttributes = null)
+        public static IHtmlString LinkButton(this HtmlHelper htmlHelper, string text, string url, object htmlAttributes = null)
+        {
+            var button = new TagBuilder("button");
+            button.MergeAttribute("type", "button");
+            button.MergeAttributes(new RouteValueDictionary(htmlAttributes), true);
+            button.MergeAttribute("onclick", @"window.location='" + url + "'");
+            button.SetInnerText(text);
+            return MvcHtmlString.Create(button.ToString(TagRenderMode.Normal));
+        }
+
+        public static IHtmlString SubmitButton(this HtmlHelper htmlHelper, string text, object htmlAttributes = null)
+        {
+            var button = new TagBuilder("button");
+            button.MergeAttribute("type", "submit");
+            button.MergeAttributes(new RouteValueDictionary(htmlAttributes), true);
+            button.SetInnerText(text);
+            return MvcHtmlString.Create(button.ToString(TagRenderMode.Normal));
+        }
+
+        public static IHtmlString MultiSelect(this HtmlHelper htmlHelper, string name, IEnumerable<SelectListItem> items, IDictionary<string, object> htmlAttributes = null)
         {
             var fullName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
 
@@ -73,7 +93,7 @@ namespace Common
             return MvcHtmlString.Create(sb.ToString());
         }
 
-        public static MvcHtmlString SingleSelect(this HtmlHelper htmlHelper, string name, IEnumerable<SelectListItem> items, IDictionary<string, object> htmlAttributes = null)
+        public static IHtmlString SingleSelect(this HtmlHelper htmlHelper, string name, IEnumerable<SelectListItem> items, IDictionary<string, object> htmlAttributes = null)
         {
             var fullName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
 

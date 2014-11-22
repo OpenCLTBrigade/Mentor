@@ -41,20 +41,23 @@
                 <div id="title">MENTOR CHARLOTTE</div>
                 @if (Request.IsAuthenticated)
                 {
-                    @Html.ActionLink("Codes", "Index", "Code")
+                    @Html.ActionLink("Codes", "Index", "Code") @:| @Html.ActionLink("Agencies", "ListAgencies", "Agency")
                 }
                 <div class="clearfix">
                     @RenderBody()
                 </div>
-                <div>
-                    @User.Identity.Name
-                </div>
+                @if (Request.IsAuthenticated)
+                {
+                    <div>
+                        @Html.ActionLink("Logout " + User.Identity.Name, "Logout", "Home")
+                    </div>
+                }
                 <img src="/Content/images/bar.jpg" class="bar" />
                 <div class="disclaimer">
-                    The information contained within this site is provided to you only as a convenience, 
-                    and does not imply endorsement of the agencies included herein.   
-                    Additionally, the information provided here is not intended to be all encompassing. 
-                    It is provided to assist in helping mentors get connected with mentoring agencies.  
+                    The information contained within this site is provided to you only as a convenience,
+                    and does not imply endorsement of the agencies included herein.
+                    Additionally, the information provided here is not intended to be all encompassing.
+                    It is provided to assist in helping mentors get connected with mentoring agencies.
                 </div>
             </div>
         </div>
