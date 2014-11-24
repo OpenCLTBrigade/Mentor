@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Common;
 
@@ -7,11 +8,13 @@ namespace Mentor
     public class HomeController : Controller
     {
         private readonly AgencyService _agencies;
+        private readonly CodeService _codes;
         private readonly UserService _users;
 
-        public HomeController(AgencyService agencyService, UserService userService)
+        public HomeController(AgencyService agencyService, CodeService codeService, UserService userService)
         {
             _agencies = agencyService;
+            _codes = codeService;
             _users = userService;
         }
 
@@ -58,16 +61,16 @@ namespace Mentor
                 TryUpdateModel(agency);
                 _agencies.Save(agency);
                 return Content("Registration successful " + agency.Id);
-
             }
+            ViewBag.Codes = _codes.Query().ToList();
             return View(agency);
         }
 
-        public ActionResult Search()
+        public ActionResult Search(AgencySearch agencySearch)
         {
-            ViewData.Merge(Request.QueryString);
-            var agencies = _agencies.Query().ToList();
-            return View(agencies);
+            agencySearch.Agencies = _agencies.Query(agencySearch).ToList();
+            ViewBag.Codes = _codes.Query().ToList();
+            return View(agencySearch);
         }
 
         //[Authorize]

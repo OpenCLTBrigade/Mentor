@@ -96,49 +96,49 @@
             </div>
             <div class="form-group">
                 <label>Select the model(s) that best describe your program:</label>
-                @Html.Editor("ProgramType", "_CodeMultiSelect", new { Model.Id, Type = "Agency.ProgramType" })
+                @Html.EditorFor(x => x.ProgramType, "_CodeMultiSelect", new { Type = "Agency.ProgramType", ViewBag.Codes })
             </div>
             <div class="form-group">
                 <label>Where do mentor-mentee pairs meet within your program?</label>
-                @Html.Editor("MeetingLocation", "_CodeMultiSelect", new { Model.Id, Type = "Agency.MeetingLocation" })
+                @Html.EditorFor(x => x.MeetingLocation, "_CodeMultiSelect", new { Type = "Agency.MeetingLocation", ViewBag.Codes })
                 @Html.TextBoxFor(x => x.MeetingLocationOther, new { @class = "form-control" })
             </div>
             <div class="form-group">
                 <label>In which section of metro Charlotte does your program operate?</label>
-                @Html.Editor("MetroSection", "_CodeMultiSelect", new { Model.Id, Type = "Agency.MetroSection" })
+                @Html.EditorFor(x => x.MetroSection, "_CodeMultiSelect", new { Type = "Agency.MetroSection", ViewBag.Codes })
             </div>
             <div class="form-group">
                 <label>Age of mentors within your program:</label>
-                @Html.Editor("MentorAge", "_CodeMultiSelect", new { Model.Id, Type = "Agency.MentorAge" })
+                @Html.EditorFor(x => x.MentorAge, "_CodeMultiSelect", new { Type = "Agency.MentorAge", ViewBag.Codes })
             </div>
             <div class="form-group">
                 <label>Age of youth served by your program:</label>
-                @Html.Editor("MenteeAge", "_CodeMultiSelect", new { Model.Id, Type = "Agency.MenteeAge" })
+                @Html.EditorFor(x => x.MenteeAge, "_CodeMultiSelect", new { Type = "Agency.MenteeAge", ViewBag.Codes })
             </div>
             <div class="form-group">
                 <label>Gender of youth served by your program:</label>
-                @Html.Editor("MenteeGender", "_CodeMultiSelect", new { Model.Id, Type = "Agency.MenteeGender" })
+                @Html.EditorFor(x => x.MenteeGender, "_CodeMultiSelect", new { Type = "Agency.MenteeGender", ViewBag.Codes })
             </div>
             <div class="form-group">
                 <label>Method of youth referral:</label>
-                @Html.Editor("ReferralMethod", "_CodeMultiSelect", new { Model.Id, Type = "Agency.ReferralMethod" })
+                @Html.EditorFor(x => x.ReferralMethod, "_CodeMultiSelect", new { Type = "Agency.ReferralMethod", ViewBag.Codes })
                 @Html.TextBoxFor(x => x.ReferralMethodOther, new { @class = "form-control" })
             </div>
             <div class="form-group">
                 <label>Expected length of commitment for youth and mentors:</label>
-                @Html.Editor("ExpectedCommitment", "_CodeSingleSelect", new { Model.Id, Type = "Agency.ExpectedCommitment" })
+                @Html.EditorFor(x => x.ExpectedCommitment, "_CodeSingleSelect", new { Type = "Agency.ExpectedCommitment", ViewBag.Codes })
             </div>
             <div class="form-group">
                 <label>Expected frequency of mentoring activities:</label>
-                @Html.Editor("MentoringFrequency", "_CodeSingleSelect", new { Model.Id, Type = "Agency.MentoringFrequency" })
+                @Html.EditorFor(x => x.MentoringFrequency, "_CodeSingleSelect", new { Type = "Agency.MentoringFrequency", ViewBag.Codes })
             </div>
             <div class="form-group">
                 <label>How much time is spent in each session?</label>
-                @Html.Editor("SessionLength", "_CodeSingleSelect", new { Model.Id, Type = "Agency.SessionLength" })
+                @Html.EditorFor(x => x.SessionLength, "_CodeSingleSelect", new { Type = "Agency.SessionLength", ViewBag.Codes })
             </div>
             <div class="form-group">
                 <label>How long has your program been in existence?</label>
-                @Html.Editor("ProgramExistence", "_CodeSingleSelect", new { Model.Id, Type = "Agency.ProgramExistence" })
+                @Html.EditorFor(x => x.ProgramExistence, "_CodeSingleSelect", new { Type = "Agency.ProgramExistence", ViewBag.Codes })
             </div>
             <div class="form-group">
                 <label>Please provide your staff count:</label>
@@ -153,17 +153,17 @@
             </div>
             <div class="form-group">
                 <label>Select the youth intake process components:</label>
-                @Html.Editor("MenteeIntake", "_CodeMultiSelect", new { Model.Id, Type = "Agency.MenteeIntake" })
+                @Html.EditorFor(x => x.MenteeIntake, "_CodeMultiSelect", new { Type = "Agency.MenteeIntake", ViewBag.Codes })
                 @Html.TextBoxFor(x => x.MenteeIntakeOther, new { @class = "form-control" })
             </div>
             <div class="form-group">
                 <label>Please select the mentor screening process components:</label>
-                @Html.Editor("MentorScreening", "_CodeMultiSelect", new { Model.Id, Type = "Agency.MentorScreening" })
+                @Html.EditorFor(x => x.MentorScreening, "_CodeMultiSelect", new { Type = "Agency.MentorScreening", ViewBag.Codes })
                 @Html.TextBoxFor(x => x.MentorScreeningOther, new { @class = "form-control" })
             </div>
             <div class="form-group">
                 <label>Describe the mentor training provided (select all that apply)</label>
-                @Html.Editor("MentorTraining", "_CodeMultiSelect", new { Model.Id, Type = "Agency.MentorTraining" })
+                @Html.EditorFor(x => x.MentorTraining, "_CodeMultiSelect", new { Type = "Agency.MentorTraining", ViewBag.Codes })
                 @Html.TextBoxFor(x => x.MentorTrainingOther, new { @class = "form-control" })
             </div>
             <div class="form-group">

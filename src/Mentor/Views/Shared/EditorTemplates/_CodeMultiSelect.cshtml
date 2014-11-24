@@ -1,38 +1,24 @@
 ﻿@{
     var selected = new List<int>();
-    var id = (int?) ViewData["Id"];
-    var field = ViewData.TemplateInfo.HtmlFieldPrefix;
     var type = (string)ViewData["Type"];
-    var value = (string) ViewData["Value"];
-    if (value != null)
+    var values = (string[])ViewData.Model;
+    if (values != null)
     {
-        selected = value.Split(',').Select(int.Parse).ToList();
+        selected = values.Select(int.Parse).ToList();
     }
     var active = Request.IsAuthenticated;
-    using (var db = new MentorDb())
-    {
-        if (id != null)
-        {
-            selected = db.AgencyCodes
-                         .Where(x => x.AgencyId == id && x.CodeType == field)
-                         .Select(x => x.CodeId)
-                         .Distinct()
-                         .ToList();
-        }
-            
-        var codes = db.Codes
-                      .Where(x => x.Type == type)
-                      .Where(x => active || x.Seq >= 0)
-                      .OrderBy(x => x.Seq)
-                      .ThenBy(x => x.Value)
-                      .Select(x => new SelectListItem
-                      {
-                          Value = x.Id.ToString(),
-                          Text = x.Label ?? x.Value,
-                          Selected = selected.Contains(x.Id),
-                      })
-                      .ToList();
-        
-        @Html.MultiSelect("", codes)
-    }
+    var codes = (List<Code>) ViewBag.Codes;
+
+    var items = codes.Where(x => x.Type == type)
+                     .Where(x => active || x.Seq >= 0)
+                     .OrderBy(x => x.Seq)
+                     .ThenBy(x => x.Value)
+                     .Select(x => new SelectListItem
+                     {
+                         Value = x.Id.ToString(),
+                         Text = x.Label ?? x.Value,
+                         Selected = selected.Contains(x.Id),
+                     })
+                     .ToList();
 }
+@Html.MultiSelect("", items)

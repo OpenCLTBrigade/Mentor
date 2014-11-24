@@ -11,6 +11,7 @@ namespace Mentor
     {
         public MentorDb()
         {
+            Database.Log = x => System.Diagnostics.Debug.Write(x);
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<MentorDb, MentorDbMigrationConfiguration>());
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;

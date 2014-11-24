@@ -8,10 +8,12 @@ namespace Mentor
     public class AgencyController : Controller
     {
         private readonly AgencyService _agencies;
+        private readonly CodeService _codes;
 
-        public AgencyController(AgencyService agencyService)
+        public AgencyController(AgencyService agencyService, CodeService codeService)
         {
             _agencies = agencyService;
+            _codes = codeService;
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
@@ -31,6 +33,7 @@ namespace Mentor
                 _agencies.Save(agency);
                 return RedirectToAction("ListAgencies");
             }
+            ViewBag.Codes = _codes.Query().ToList();
             return View(agency);
         }
 

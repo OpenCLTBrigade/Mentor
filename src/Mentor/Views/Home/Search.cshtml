@@ -1,7 +1,7 @@
-﻿@model List<Agency>
+﻿@model AgencySearch
 @{
     ViewBag._Title = "Find a Program";
-    var agencies = Model.Where(x => x.Address != null)
+    var agencies = Model.Agencies.Where(x => x.Address != null)
                         .Select(x => new
                         {
                             x.Id,
@@ -17,7 +17,7 @@
 <div class="clearfix">
     <div class="pull-left">
         <h2>Charlotte Mentoring Agencies</h2>
-        @foreach (var agency in Model)
+        @foreach (var agency in Model.Agencies)
         {
             <div>
                 @Html.ActionLink(agency.Name, "Agency", new { agency.Id })
@@ -29,10 +29,31 @@
         <p><i>Use the criteria below to help find a great mentoring agency.</i></p>
         <div class="clearfix">
             <form method="GET">
-                <div>Located within @Html.TextBox("Miles", null, new { size = "4" }) miles of this address: @Html.TextBox("Address")</div>
+                <div>Located within @Html.TextBoxFor(x => x.Miles, new { size = "4" }) miles of this address: @Html.TextBoxFor(x => x.Address)</div>
                 <div class="pull-left">
                     <b>Mentoring Type</b>
-                    @Html.Editor("ProgramType", "_CodeMultiSelect", new { Type = "Agency.ProgramType", Value = ViewBag.ProgramType })
+                    @Html.EditorFor(x => x.ProgramType, "_CodeMultiSelect", new { Type = "Agency.ProgramType" })
+                    <b>Age Served</b>
+                    @Html.EditorFor(x => x.MenteeAge, "_CodeMultiSelect", new { Type = "Agency.MenteeAge" })
+                    <b>Gender Served</b>
+                    @Html.EditorFor(x => x.MenteeGender, "_CodeMultiSelect", new { Type = "Agency.MenteeGender" })
+                    <b>Keyword Search</b>
+                    @Html.TextBoxFor(x => x.Q)
+                    <h3>Advanced Search</h3>
+                    <b>Mentor-mentee pair meeting locations</b>
+                    @Html.EditorFor(x => x.MeetingLocation, "_CodeMultiSelect", new { Type = "Agency.MeetingLocation" })
+                    <b>Primary program Location</b>
+                    @Html.EditorFor(x => x.MetroSection, "_CodeMultiSelect", new { Type = "Agency.MetroSection" })
+                    <b>Age of mentors within program</b>
+                    @Html.EditorFor(x => x.MentorAge, "_CodeMultiSelect", new { Type = "Agency.MentorAge" })
+                    <b>Method of youth referral</b>
+                    @Html.EditorFor(x => x.ReferralMethod, "_CodeMultiSelect", new { Type = "Agency.ReferralMethod" })
+                    <b>Expected length of commitment for youth and mentors</b>
+                    @Html.EditorFor(x => x.ExpectedCommitment, "_CodeMultiSelect", new { Type = "Agency.ExpectedCommitment" })
+                    <b>Expected frequency of mentoring activities</b>
+                    @Html.EditorFor(x => x.MentoringFrequency, "_CodeMultiSelect", new { Type = "Agency.MentoringFrequency" })
+                    <b>Amount of time spent in each session</b>
+                    @Html.EditorFor(x => x.SessionLength, "_CodeMultiSelect", new { Type = "Agency.SessionLength" })
                 </div>
                 <div>
                     @Html.SubmitButton("Search", new{@class="btn btn-primary"})

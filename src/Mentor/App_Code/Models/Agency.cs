@@ -107,14 +107,14 @@ namespace Mentor
         [NotMapped]
         public string[] ProgramType
         {
-            get { return null; }
+            get { return GetCodes("ProgramType"); }
             set { SetCodes("ProgramType", value.Select(int.Parse).ToList()); }
         }
 
         [NotMapped]
         public string[] MeetingLocation
         {
-            get { return null; }
+            get { return GetCodes("MeetingLocation"); }
             set { SetCodes("MeetingLocation", value.Select(int.Parse).ToList()); }
         }
 
@@ -124,35 +124,35 @@ namespace Mentor
         [NotMapped]
         public string[] MetroSection
         {
-            get { return null; }
+            get { return GetCodes("MetroSection"); }
             set { SetCodes("MetroSection", value.Select(int.Parse).ToList()); }
         }
 
         [NotMapped]
         public string[] MentorAge
         {
-            get { return null; }
+            get { return GetCodes("MentorAge"); }
             set { SetCodes("MentorAge", value.Select(int.Parse).ToList()); }
         }
 
         [NotMapped]
         public string[] MenteeAge
         {
-            get { return null; }
+            get { return GetCodes("MenteeAge"); }
             set { SetCodes("MenteeAge", value.Select(int.Parse).ToList()); }
         }
 
         [NotMapped]
         public string[] MenteeGender
         {
-            get { return null; }
+            get { return GetCodes("MenteeGender"); }
             set { SetCodes("MenteeGender", value.Select(int.Parse).ToList()); }
         }
 
         [NotMapped]
         public string[] ReferralMethod
         {
-            get { return null; }
+            get { return GetCodes("ReferralMethod"); }
             set { SetCodes("ReferralMethod", value.Select(int.Parse).ToList()); }
         }
 
@@ -162,28 +162,28 @@ namespace Mentor
         [NotMapped]
         public string[] ExpectedCommitment
         {
-            get { return null; }
+            get { return GetCodes("ExpectedCommitment"); }
             set { SetCodes("ExpectedCommitment", value.Select(int.Parse).ToList()); }
         }
 
         [NotMapped]
         public string[] MentoringFrequency
         {
-            get { return null; }
+            get { return GetCodes("MentoringFrequency"); }
             set { SetCodes("MentoringFrequency", value.Select(int.Parse).ToList()); }
         }
 
         [NotMapped]
         public string[] SessionLength
         {
-            get { return null; }
+            get { return GetCodes("SessionLength"); }
             set { SetCodes("SessionLength", value.Select(int.Parse).ToList()); }
         }
 
         [NotMapped]
         public string[] ProgramExistence
         {
-            get { return null; }
+            get { return GetCodes("ProgramExistence"); }
             set { SetCodes("ProgramExistence", value.Select(int.Parse).ToList()); }
         }
 
@@ -200,7 +200,7 @@ namespace Mentor
         [NotMapped]
         public string[] MenteeIntake
         {
-            get { return null; }
+            get { return GetCodes("MenteeIntake"); }
             set { SetCodes("MenteeIntake", value.Select(int.Parse).ToList()); }
         }
 
@@ -210,7 +210,7 @@ namespace Mentor
         [NotMapped]
         public string[] MentorScreening
         {
-            get { return null; }
+            get { return GetCodes("MentorScreening"); }
             set { SetCodes("MentorScreening", value.Select(int.Parse).ToList()); }
         }
 
@@ -220,7 +220,7 @@ namespace Mentor
         [NotMapped]
         public string[] MentorTraining
         {
-            get { return null; }
+            get { return GetCodes("MentorTraining"); }
             set { SetCodes("MentorTraining", value.Select(int.Parse).ToList()); }
         }
 

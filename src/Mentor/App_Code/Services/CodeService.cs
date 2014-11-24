@@ -12,14 +12,12 @@ namespace Mentor
             _db = db;
         }
 
-        public IQueryable<Code> Query(string type)
+        public IQueryable<Code> Query(string type = null)
         {
-            if (string.IsNullOrWhiteSpace(type))
-                return new List<Code>().AsQueryable();
-
             return _db.Codes
-                      .Where(x => x.Type == type)
-                      .OrderBy(x => x.Seq)
+                      .Where(x => type == null || x.Type == type)
+                      .OrderBy(x => x.Type)
+                      .ThenBy(x => x.Seq)
                       .ThenBy(x => x.Value);
         }
 
