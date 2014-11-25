@@ -17,11 +17,9 @@ namespace Mentor
             _db = db;
         }
 
-        public IQueryable<Agency> Query(AgencySearch agencySearch = null)
+        public IQueryable<Agency> Query()
         {
-            return agencySearch == null
-                ? _db.Agencies.OrderBy(x => x.Name)
-                : agencySearch.Filter(_db.Agencies);
+            return _db.Agencies.OrderBy(x => x.Name);
         }
 
         public Agency Find(int? id)

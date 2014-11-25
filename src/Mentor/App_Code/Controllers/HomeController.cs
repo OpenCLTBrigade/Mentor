@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Common;
 
@@ -68,7 +67,11 @@ namespace Mentor
 
         public ActionResult Search(AgencySearch agencySearch)
         {
-            agencySearch.Agencies = _agencies.Query(agencySearch).ToList();
+            if (agencySearch == null)
+                agencySearch = new AgencySearch();
+
+            agencySearch.Filter(_agencies.Query());
+
             ViewBag.Codes = _codes.Query().ToList();
             return View(agencySearch);
         }

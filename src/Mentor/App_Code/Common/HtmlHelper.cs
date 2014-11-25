@@ -67,6 +67,15 @@ namespace Common
             return MvcHtmlString.Create(button.ToString(TagRenderMode.Normal));
         }
 
+        public static IHtmlString Button(this HtmlHelper htmlHelper, string text, object htmlAttributes = null)
+        {
+            var button = new TagBuilder("button");
+            button.MergeAttribute("type", "button");
+            button.MergeAttributes(new RouteValueDictionary(htmlAttributes), true);
+            button.SetInnerText(text);
+            return MvcHtmlString.Create(button.ToString(TagRenderMode.Normal));
+        }
+
         public static IHtmlString MultiSelect(this HtmlHelper htmlHelper, string name, IEnumerable<SelectListItem> items, IDictionary<string, object> htmlAttributes = null)
         {
             var fullName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);

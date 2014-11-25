@@ -44,6 +44,7 @@
 
         bundles.Add(new ScriptBundle("~/scripts/bootstrap").Include(
             "~/Content/jquery/jquery-2.1.1.min.js",
-            "~/Content/bootstrap/bootstrap.min.js"));
+            "~/Content/bootstrap/bootstrap.min.js",
+            "~/Content/scripts.js"));
     }
 </script>
