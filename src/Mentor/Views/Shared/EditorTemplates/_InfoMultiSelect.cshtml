@@ -1,0 +1,32 @@
+﻿@{
+    var name = ViewData.TemplateInfo.GetFullHtmlFieldName("");
+    var selected = new List<int>();
+    var type = (string)ViewData["Type"];
+    var values = (string[])ViewData.Model;
+    if (values != null)
+    {
+        selected = values.Select(int.Parse).ToList();
+    }
+    var active = Request.IsAuthenticated;
+    var codes = (List<Code>)ViewBag.Codes;
+    var items = codes.Where(x => x.Type == type)
+                     .Where(x => active || x.Seq >= 0)
+                     .OrderBy(x => x.Seq)
+                     .ThenBy(x => x.Value)
+                     .ToList();
+}
+@foreach (var item in items)
+{
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" name="@name" value="@item.Id" @(selected.Contains(item.Id) ? "checked='checked'" : "") />
+            @item.Value
+            @if (!string.IsNullOrWhiteSpace(item.Label))
+            {
+                <a href="#" data-toggle="tooltip" data-placement="top" title="@item.Label">
+                    <i class="glyphicon glyphicon-info-sign"></i>
+                </a>
+            }
+        </label>
+    </div>
+}

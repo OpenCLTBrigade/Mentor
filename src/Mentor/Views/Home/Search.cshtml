@@ -2,8 +2,8 @@
 @{
     ViewBag._Title = "Find a Program";
 }
-<div class="clearfix">
-    <div class="pull-left">
+<div id="searchPage" class="clearfix">
+    <div class="pull-left agencies">
         <h2>Charlotte Mentoring Agencies</h2>
         @foreach (var agency in Model.Agencies)
         {
@@ -12,45 +12,70 @@
             </div>
         }
     </div>
-    <div class="pull-right">
-        <h2>Let Us Help You Find an Agency!</h2>
+    <div class="pull-right search">
+        <h4>Let Us Help You Find an Agency!</h4>
         <p><i>Use the criteria below to help find a great mentoring agency.</i></p>
-        <div class="clearfix">
+        <div class="clearfix scroll">
             <form method="GET" class="searchForm">
                 @Html.HiddenFor(x => x.Latitude)
                 @Html.HiddenFor(x => x.Longitude)
                 <div>Located within @Html.TextBoxFor(x => x.Miles, new { size = "4" }) miles of this address: @Html.TextBoxFor(x => x.Address)</div>
                 <div class="pull-left">
-                    <b>Mentoring Type</b>
-                    @Html.EditorFor(x => x.ProgramType, "_CodeMultiSelect", new { Type = "Agency.ProgramType" })
-                    <b>Age Served</b>
-                    @Html.EditorFor(x => x.MenteeAge, "_CodeMultiSelect", new { Type = "Agency.MenteeAge" })
-                    <b>Gender Served</b>
-                    @Html.EditorFor(x => x.MenteeGender, "_CodeMultiSelect", new { Type = "Agency.MenteeGender" })
-                    <b>Keyword Search</b>
-                    @Html.TextBoxFor(x => x.Q)
-                    <h3>Advanced Search</h3>
-                    <b>Mentor-mentee pair meeting locations</b>
-                    @Html.EditorFor(x => x.MeetingLocation, "_CodeMultiSelect", new { Type = "Agency.MeetingLocation" })
-                    <b>Primary program Location</b>
-                    @Html.EditorFor(x => x.MetroSection, "_CodeMultiSelect", new { Type = "Agency.MetroSection" })
-                    <b>Age of mentors within program</b>
-                    @Html.EditorFor(x => x.MentorAge, "_CodeMultiSelect", new { Type = "Agency.MentorAge" })
-                    <b>Method of youth referral</b>
-                    @Html.EditorFor(x => x.ReferralMethod, "_CodeMultiSelect", new { Type = "Agency.ReferralMethod" })
-                    <b>Expected length of commitment for youth and mentors</b>
-                    @Html.EditorFor(x => x.ExpectedCommitment, "_CodeMultiSelect", new { Type = "Agency.ExpectedCommitment" })
-                    <b>Expected frequency of mentoring activities</b>
-                    @Html.EditorFor(x => x.MentoringFrequency, "_CodeMultiSelect", new { Type = "Agency.MentoringFrequency" })
-                    <b>Amount of time spent in each session</b>
-                    @Html.EditorFor(x => x.SessionLength, "_CodeMultiSelect", new { Type = "Agency.SessionLength" })
-                </div>
-                <div>
-                    @Html.Button("Search", new{ @class="btn btn-primary submitSearch" })
+                    <div class="clearfix">
+                        <div class="pull-left question">
+                            <b>Mentoring Type</b>
+                            @Html.EditorFor(x => x.ProgramType, "_InfoMultiSelect", new { Type = "Agency.ProgramType" })
+                        </div>
+                        <div class="pull-left question">
+                            <b>Age Served</b>
+                            @Html.EditorFor(x => x.MenteeAge, "_InfoMultiSelect", new { Type = "Agency.MenteeAge" })
+                        </div>
+                        <div class="pull-left question">
+                            <b>Gender Served</b>
+                            @Html.EditorFor(x => x.MenteeGender, "_InfoMultiSelect", new { Type = "Agency.MenteeGender" })
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <b>Keyword Search</b>
+                        @Html.TextBoxFor(x => x.Q)
+                        @Html.Button("Search", new { @class = "btn btn-primary pull-right submitSearch" })
+                    </div>
+                    <div class="clearfix">
+                        <h4>Advanced Search</h4>
+                        <div class="pull-left question">
+                            <b>Mentor-mentee pair meeting locations</b>
+                            @Html.EditorFor(x => x.MeetingLocation, "_CodeMultiSelect", new { Type = "Agency.MeetingLocation" })
+                        </div>
+                        <div class="pull-left question">
+                            <b>Primary program Location</b>
+                            @Html.EditorFor(x => x.MetroSection, "_CodeMultiSelect", new { Type = "Agency.MetroSection" })
+                        </div>
+                        <div class="pull-left question">
+                            <b>Age of mentors within program</b>
+                            @Html.EditorFor(x => x.MentorAge, "_CodeMultiSelect", new { Type = "Agency.MentorAge" })
+                        </div>
+                        <div class="pull-left question">
+                            <b>Method of youth referral</b>
+                            @Html.EditorFor(x => x.ReferralMethod, "_CodeMultiSelect", new { Type = "Agency.ReferralMethod" })
+                        </div>
+                        <div class="pull-left question">
+                            <b>Expected length of commitment for youth and mentors</b>
+                            @Html.EditorFor(x => x.ExpectedCommitment, "_CodeMultiSelect", new { Type = "Agency.ExpectedCommitment" })
+                        </div>
+                        <div class="pull-left question">
+                            <b>Expected frequency of mentoring activities</b>
+                            @Html.EditorFor(x => x.MentoringFrequency, "_CodeMultiSelect", new { Type = "Agency.MentoringFrequency" })
+                        </div>
+                        <div class="pull-left question">
+                            <b>Amount of time spent in each session</b>
+                            @Html.EditorFor(x => x.SessionLength, "_CodeMultiSelect", new { Type = "Agency.SessionLength" })
+                        </div>
+                        @Html.Button("Search", new { @class = "btn btn-primary pull-right submitSearch" })
+                    </div>
                 </div>
             </form>
         </div>
-        <div id="map-canvas" style='width:600px;height:400px;'></div>
+        <div id="map-canvas" style='width:650px;height:400px;'></div>
     </div>
 </div>
 

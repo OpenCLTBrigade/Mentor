@@ -13,7 +13,7 @@
 <body id="site">
     <!-- HEADER -->
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
+        <div class="container">
             <div class="navbar-brand">
                 <a href="~/"><img src="/Content/images/logo.png" width="106" height="100" /></a>
             </div>
@@ -33,7 +33,7 @@
         </div>
     </div>
     <!-- BODY -->
-    <div class="container-fluid">
+    <div class="container content">
         <div class="row">
             <div class="main">
                 <!-- Spacer for logo -->
@@ -53,7 +53,7 @@
                 </div>
                 @if (Request.IsAuthenticated)
                 {
-                    <div>
+                    <div class="userinfo">
                         @Html.ActionLink("Logout " + User.Identity.Name, "Logout", "Home")
                     </div>
                 }

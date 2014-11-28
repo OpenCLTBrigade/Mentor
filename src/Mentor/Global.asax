@@ -39,12 +39,12 @@
     {
         bundles.Add(new StyleBundle("~/content/css/bootstrap").Include(
             "~/Content/bootstrap/bootstrap.min.css",
-            "~/Content/dashboard.css",
             "~/Content/style.css"));
 
         bundles.Add(new ScriptBundle("~/scripts/bootstrap").Include(
             "~/Content/jquery/jquery-2.1.1.min.js",
             "~/Content/bootstrap/bootstrap.min.js",
+            "~/Content/bootstrap/respond.js",
             "~/Content/scripts.js"));
     }
 </script>

@@ -16,3 +16,11 @@ $('button.submitSearch').click(function () {
         }
     });
 });
+
+$(function() {
+    $('[data-toggle="tooltip"]').tooltip().each(function () {
+        $(this).css({ outline: 'none' });
+    }).click(function() {
+        return false;
+    });
+});
