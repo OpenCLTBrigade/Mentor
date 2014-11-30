@@ -1,12 +1,10 @@
 ﻿@{
     Layout = null;
 }
-@using System.Web.Optimization
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag._Title</title>
     @Styles.Render("~/content/css/bootstrap")
 </head>
@@ -17,7 +15,7 @@
             <div class="navbar-brand">
                 <a href="~/"><img src="/Content/images/logo.png" width="106" height="100" /></a>
             </div>
-            <div class="navbar-collapse">
+            <div>
                 <ul class="nav navbar-nav">
                     <li>
                         @Html.ActionLink("Find a Program", "Search", "Home")

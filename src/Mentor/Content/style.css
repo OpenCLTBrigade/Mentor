@@ -1,5 +1,6 @@
 ﻿
-body { background-image:url(/content/images/trianglify.svg); }
+html { background:url(/content/images/trianglify.svg) no-repeat center center fixed; background-size:cover; }
+body { background-color: transparent; }
 
 a:hover { text-decoration: underline; }
 
@@ -9,12 +10,13 @@ a:hover { text-decoration: underline; }
     background-color: #CE8228;
 }
 
+.navbar-nav { float: left; }
+.navbar-nav > li { float: left; }
 .navbar-inverse .navbar-nav > li > a {
     color: black;
     font-weight: bold;
     text-transform: uppercase;
 }
-
 .navbar-brand {
     margin-top: -10px;
 }
@@ -23,10 +25,12 @@ a:hover { text-decoration: underline; }
     background-color: #ce8228;
     display: block;
 }
+.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand { margin-left:-15px }
 
+.container { width: 1150px !important; }
 .container.content { background-color:white; }
 .main { padding-top: 0; }
-.bar { display:block; margin:1em auto; width:959px; }
+.bar { display:block; margin:1em auto; width:890px; }
 .userinfo { margin-top:15px; }
 .disclaimer { color:gray; font-size: 12px; }
 .question { margin-right:10px; }
