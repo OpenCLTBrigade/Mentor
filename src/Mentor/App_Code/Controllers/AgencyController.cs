@@ -5,6 +5,7 @@ using Common;
 
 namespace Mentor
 {
+    [Authorize(Roles = "Admin")]
     public class AgencyController : Controller
     {
         private readonly AgencyService _agencies;

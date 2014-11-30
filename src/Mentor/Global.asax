@@ -6,12 +6,21 @@
 <%@ Import Namespace="SimpleInjector" %>
 <%@ Import Namespace="SimpleInjector.Integration.Web.Mvc" %>
 
-<script RunAt="server">
+<script runat="server">
     void Application_Start(Object sender, EventArgs args)
     {
         ConfigureContainer();
         ConfigureRoutes(RouteTable.Routes);
         ConfigureBundles(BundleTable.Bundles);
+    }
+
+    protected void Application_AuthenticateRequest(Object sender, EventArgs e)
+    {
+        var principal = UserService.GetPrincipal();
+        if (principal == null)
+            return;
+        
+        Context.User = principal;
     }
 
     private static void ConfigureContainer()

@@ -5,6 +5,7 @@ using Common;
 
 namespace Mentor
 {
+    [Authorize(Roles = "Admin")]
     public class CodeController : Controller
     {
         private readonly CodeService _codes;

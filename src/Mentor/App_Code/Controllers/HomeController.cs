@@ -4,6 +4,7 @@ using Common;
 
 namespace Mentor
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly AgencyService _agencies;

@@ -1,0 +1,12 @@
+﻿@model dynamic
+@{
+    if (User.IsInRole("Admin"))
+    {
+        <nav class="navbar navbar-default" role="navigation">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Codes", "ManageCodes", "Code")</li>
+                <li>@Html.ActionLink("Agencies", "ListAgencies", "Agency")</li>
+            </ul>
+        </nav>
+    }
+}

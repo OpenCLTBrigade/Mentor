@@ -39,15 +39,7 @@
                 <!-- Spacer for logo -->
                 <div style="float:left;width:100px;height:50px;">&nbsp;</div>
                 <div id="title">MENTOR CHARLOTTE</div>
-                @if (Request.IsAuthenticated)
-                {
-                    <nav class="navbar navbar-default" role="navigation">
-                        <ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("Codes", "ManageCodes", "Code")</li>
-                            <li>@Html.ActionLink("Agencies", "ListAgencies", "Agency")</li>
-                        </ul>
-                    </nav>
-                }
+                @Html.Partial("_AdminNav")
                 <div class="clearfix">
                     @RenderBody()
                 </div>
