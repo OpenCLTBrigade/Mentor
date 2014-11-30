@@ -3,7 +3,7 @@ window.searched = {};
 
 $('button.submitSearch').click(function () {
     var addr = $('input[name=Address]').val();
-    if (addr === window.searched.Address) {
+    if (!addr || addr === window.searched.Address) {
         $('form.searchForm').submit();
         return;
     }
