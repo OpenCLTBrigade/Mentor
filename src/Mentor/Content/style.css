@@ -32,11 +32,14 @@ a:hover { text-decoration: underline; }
 .main { padding-top: 0; }
 .bar { display:block; margin:1em auto; width:890px; }
 .userinfo { margin-top:15px; }
-.disclaimer { color:gray; font-size: 12px; }
 .question { margin-right:10px; }
 .agencies { max-width:400px; }
 .search { max-width:650px; }
 .search .scroll { max-height:325px; overflow:auto; margin-bottom:15px; padding-right:15px; }
+.disclaimer { color:gray; font-size: 12px; }
+.disclaimer .pull-left { width: 700px; }
+.disclaimer b { color: black; }
+.disclaimer .pull-right { text-indent: -30px; }
 
 #searchPage h2 { margin-top:0; }
 
