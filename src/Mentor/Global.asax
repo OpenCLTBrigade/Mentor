@@ -10,8 +10,9 @@
     void Application_Start(Object sender, EventArgs args)
     {
         ConfigureContainer();
-        ConfigureRoutes(RouteTable.Routes);
         ConfigureBundles(BundleTable.Bundles);
+        ConfigureFilters(GlobalFilters.Filters);
+        ConfigureRoutes(RouteTable.Routes);
     }
 
     protected void Application_AuthenticateRequest(Object sender, EventArgs e)
@@ -21,27 +22,6 @@
             return;
         
         Context.User = principal;
-    }
-
-    private static void ConfigureContainer()
-    {
-        var container = new Container();
-        container.RegisterMvcControllers(typeof(HomeController).Assembly);
-        container.RegisterMvcIntegratedFilterProvider();
-        container.RegisterPerWebRequest<MentorDb>();
-        container.Verify();
-
-        DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
-    }
-
-    private static void ConfigureRoutes(RouteCollection routes)
-    {
-        routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-        routes.MapRoute("Default",
-            url: "{controller}/{action}/{id}",
-            defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-        );
     }
 
     private static void ConfigureBundles(BundleCollection bundles)
@@ -55,5 +35,31 @@
             "~/Content/bootstrap/bootstrap.min.js",
             "~/Content/bootstrap/respond.js",
             "~/Content/scripts.js"));
+    }
+
+    private static void ConfigureContainer()
+    {
+        var container = new Container();
+        container.RegisterMvcControllers(typeof(HomeController).Assembly);
+        container.RegisterMvcIntegratedFilterProvider();
+        container.RegisterPerWebRequest<MentorDb>();
+        container.Verify();
+
+        DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
+    }
+
+    private static void ConfigureFilters(GlobalFilterCollection filters)
+    {
+        filters.Add(new HandleErrorAttribute());
+    }
+
+    private static void ConfigureRoutes(RouteCollection routes)
+    {
+        routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+        routes.MapRoute("Default",
+            url: "{controller}/{action}/{id}",
+            defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+        );
     }
 </script>
