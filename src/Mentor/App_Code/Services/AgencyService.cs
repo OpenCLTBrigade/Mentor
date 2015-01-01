@@ -37,8 +37,36 @@ namespace Mentor
             return new Agency();
         }
 
-        public void Save(Agency agency)
+        public void Save(Agency agency, string username = null, string password = null)
         {
+            if (string.IsNullOrWhiteSpace(agency.Name))
+            {
+                throw new ApplicationException("Please enter an agency name.");
+            }
+            else
+            {
+                agency.Name = agency.Name.Trim();
+            }
+
+            if (agency.IsNew && _db.Agencies.Any(x => x.Name == agency.Name))
+            {
+                throw new ApplicationException("The agency name '" + agency.Name + "' already exists. Please enter a unqiue name for the new agency.");
+            }
+
+            if (!string.IsNullOrEmpty(username) && !string.IsNullOrWhiteSpace(password))
+            {
+                var user = _db.Users.SingleOrDefault(x => x.Email == username);
+                if (user == null)
+                {
+                    user = new User {Email = username, Password = password, Active = true};
+                }
+                else if (user.Password != password)
+                {
+                    throw new ApplicationException("Invalid password");
+                }
+                agency.User = user;
+            }
+
             _db.Save(agency, agency.IsNew);
             _db.SaveChanges();
         }
@@ -97,6 +125,13 @@ namespace Mentor
                 _db.Agencies.Remove(agency);
             }
             _db.SaveChanges();
+        }
+
+        public List<Agency> FindByUser(string username)
+        {
+            return _db.Agencies
+                      .Where(x => x.User.Email == username)
+                      .ToList();
         }
     };
 }

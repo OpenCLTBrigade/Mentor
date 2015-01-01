@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Common;
 
@@ -52,17 +53,48 @@ namespace Mentor
             return RedirectToAction("Index");
         }
 
+        public ActionResult SelectProfile()
+        {
+            if (!Request.IsAuthenticated)
+            {
+                throw new ApplicationException("You must be logged in to edit an agency profile");
+            }
+
+            var agencies = _agencies.FindByUser(User.Identity.Name);
+            if (agencies.Count == 1)
+            {
+                var agency = agencies.First();
+                return RedirectToAction("Register", "Home", new {agency.Id});
+            }
+
+            return View(agencies);
+        }
+
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult Register(int? id)
         {
             var agency = _agencies.Find(id) ?? _agencies.Create();
+            ViewBag.Codes = _codes.Query().ToList();
+
+            if (id > 0 && !Request.IsAuthenticated)
+            {
+                throw new ApplicationException("User cannot access agency");
+            }
+
             if (Request.IsPost())
             {
-                TryUpdateModel(agency);
-                _agencies.Save(agency);
-                return Content("Registration successful " + agency.Id);
+                try
+                {
+                    TryUpdateModel(agency);
+                    _agencies.Save(agency, Request.Form["Username"], Request.Form["Password"]);
+                    return Content("Registration successful " + agency.Id);
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Error = ex;
+                    return View(agency);
+                }
             }
-            ViewBag.Codes = _codes.Query().ToList();
             return View(agency);
         }
 
@@ -75,6 +107,11 @@ namespace Mentor
 
             ViewBag.Codes = _codes.Query().ToList();
             return View(agencySearch);
+        }
+
+        public ActionResult Error()
+        {
+            return View("Error");
         }
 
         //[Authorize]

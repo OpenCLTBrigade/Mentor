@@ -24,9 +24,6 @@ namespace Mentor
 
         public bool Active { get; set; }
 
-        [ForeignKey("Agency")]
-        public int? AgencyId { get; set; }
-
-        public virtual Agency Agency { get; set; }
+        public bool IsAdmin { get; set; }
     };
 }

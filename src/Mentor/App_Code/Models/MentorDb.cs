@@ -13,6 +13,7 @@ namespace Mentor
         {
             Database.Log = x => System.Diagnostics.Debug.Write(x);
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<MentorDb, MentorDbMigrationConfiguration>());
+            //Database.SetInitializer<MentorDb>(null);
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;
             Configuration.AutoDetectChangesEnabled = true;
@@ -168,7 +169,7 @@ namespace Mentor
             context.Users.AddOrUpdate(x => x.Email,
                 new[]
                 {
-                    new User {Email = "paul@tagovi.com", Password = "pw", Active = true},
+                    new User {Email = "paul@tagovi.com", Password = "pw", Active = true, IsAdmin = true},
                 });
         }
     };

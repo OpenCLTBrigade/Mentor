@@ -201,6 +201,10 @@
                 </label>
                 <div>@Html.EditorFor(x => x.HasInterestInMma)</div>
             </div>
+            <div class="form-group">
+                <label>Is Active</label>
+                <div>@Html.CheckBoxFor(x => x.IsActive)</div>
+            </div>
         </fieldset>
         <div class="form-group">
             @Html.SubmitButton("Save Agency", new { @class = "btn btn-primary" })

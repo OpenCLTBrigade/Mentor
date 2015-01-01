@@ -1,0 +1,7 @@
+﻿@model Exception
+@if (Model != null)
+{
+    <div class="alert alert-danger">
+        @Model.GetBaseException().Message
+    </div>
+}

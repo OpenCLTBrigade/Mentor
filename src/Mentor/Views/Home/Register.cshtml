@@ -196,6 +196,17 @@
                     A member of the Alliance Board will contact you to discuss your candidacy.</i></label>
                 <div>@Html.EditorFor(x => x.HasInterestInMma)</div>
             </div>
+            @if (!Request.IsAuthenticated)
+            {
+                <div class="form-group">
+                    <label>Email address to access agency profile</label>
+                    @Html.TextBox("Username", Request.Form["Username"], new {@class = "form-control"})
+                </div>
+                <div class="form-group">
+                    <label>Password to access agency profile</label>
+                    @Html.Password("Password", Request.Form["Password"], new {@class = "form-control"})
+                </div>
+            }
         </fieldset>
         <button type="submit" class="btn btn-primary">Submit Registration</button>
     </form>

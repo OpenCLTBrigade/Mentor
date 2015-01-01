@@ -27,7 +27,9 @@ namespace Mentor
 
         public void Filter(IQueryable<Agency> agencies)
         {
-            var query = agencies.Include(x => x.Codes).AsQueryable();
+            var query = agencies.Where(x => x.IsActive)
+                                .Include(x => x.Codes)
+                                .AsQueryable();
 
             query = FilterCode(query, "ProgramType", ProgramType);
             query = FilterCode(query, "MenteeAge", MenteeAge);
@@ -55,6 +57,7 @@ namespace Mentor
                 list.ForEach(x => x.Distance = Ext.CalcDist(Latitude, Longitude, x.Latitude, x.Longitude));
                 list.RemoveAll(x => x.Distance == null || x.Distance > Miles);
             }
+
             Agencies = list;
         }
 

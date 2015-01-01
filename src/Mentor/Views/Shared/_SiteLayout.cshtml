@@ -24,7 +24,14 @@
                         @Html.ActionLink("FAQ", "Faq", "Home")
                     </li>
                     <li>
-                        @Html.ActionLink("Agency Login", "Login", "Home")
+                        @if (Request.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Edit Profile", "SelectProfile", "Home")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Agency Login", "Login", "Home")
+                        }
                     </li>
                 </ul>
             </div>

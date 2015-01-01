@@ -1,0 +1,12 @@
+﻿@model List<Agency>
+@{
+    ViewBag._Title = "Select Agency";
+}
+
+<h2>Select Agency</h2>
+<ul>
+    @foreach (var agency in Model)
+    {
+        <li>@Html.ActionLink(agency.Name, "Register", new { agency.Id })</li>
+    }
+</ul>

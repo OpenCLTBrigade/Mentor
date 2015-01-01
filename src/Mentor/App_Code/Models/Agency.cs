@@ -13,7 +13,6 @@ namespace Mentor
         public Agency()
         {
             Codes = new HashSet<AgencyCode>();
-            Users = new HashSet<User>();
         }
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -22,6 +21,7 @@ namespace Mentor
         [Required]
         [StringLength(100)]
         [DisplayName("Organization Name")]
+        [Index("IX_Agency_Name", IsUnique = true)]
         public string Name { get; set; }
 
         [StringLength(100)]
@@ -188,13 +188,9 @@ namespace Mentor
         }
 
         public int? FullTimeStaffCount { get; set; }
-
         public int? PartTimeStaffCount { get; set; }
-
         public int? UnpaidStaffCount { get; set; }
-
         public int? MentorCount { get; set; }
-
         public int? MenteeCount { get; set; }
 
         [NotMapped]
@@ -228,7 +224,6 @@ namespace Mentor
         public string MentorTrainingOther { get; set; }
 
         public int? MenteeWaitingListCount { get; set; }
-
         public decimal? MentorScreeningFee { get; set; }
 
         [MaxLength]
@@ -240,12 +235,15 @@ namespace Mentor
         [UIHint("_YesNo")]
         public bool? HasInterestInMma { get; set; }
 
+        public int? UserId { get; set; }
+
+        public bool IsActive { get; set; }
+
         [NotMapped]
         public bool IsNew { get { return Id == 0; } }
 
         public virtual ICollection<AgencyCode> Codes { get; set; }
-
-        public virtual ICollection<User> Users { get; set; }
+        public virtual User User { get; set; }
 
         public string[] GetCodes(string type)
         {
