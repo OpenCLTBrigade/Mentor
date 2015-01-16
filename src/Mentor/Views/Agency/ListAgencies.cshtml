@@ -19,6 +19,7 @@
             <th>Address</th>
             <th>Phone</th>
             <th>Website</th>
+            <th>MMA</th>
         </tr>
     </thead>
     <tbody>
@@ -30,6 +31,7 @@
                 <td>@agency.Address</td>
                 <td>@agency.Phone</td>
                 <td><a href="@agency.Website" target="_blank">@agency.Website.Left(40, "...")</a></td>
+                <td>@agency.HasInterestInMma</td>
             </tr>
         }
     </tbody>
