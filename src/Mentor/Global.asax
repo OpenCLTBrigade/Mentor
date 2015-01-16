@@ -13,7 +13,6 @@
         ConfigureBundles(BundleTable.Bundles);
         ConfigureFilters(GlobalFilters.Filters);
         ConfigureRoutes(RouteTable.Routes);
-        ModelBinders.Binders.DefaultBinder = new DependencyResolverModelBinder();
     }
 
     protected void Application_AuthenticateRequest(Object sender, EventArgs e)

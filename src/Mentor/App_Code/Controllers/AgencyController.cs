@@ -47,8 +47,9 @@ namespace Mentor
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult ImportAgencies(ImportAgencies model)
+        public ActionResult ImportAgencies()
         {
+            var model = (ImportAgencies)DependencyResolver.Current.GetService(typeof(ImportAgencies));
             var file = Request.Files["InputFile"];
             if (file != null && file.InputStream != null && file.ContentLength > 0)
             {
@@ -58,8 +59,9 @@ namespace Mentor
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
-        public ActionResult ExportAgencies(ExportAgencies model)
+        public ActionResult ExportAgencies()
         {
+            var model = (ExportAgencies)DependencyResolver.Current.GetService(typeof(ExportAgencies));
             return model.Download();
         }
 
