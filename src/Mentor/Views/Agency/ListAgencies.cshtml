@@ -3,6 +3,7 @@
     ViewBag._Title = "List Agencies";
 }
 <h1 class="page-header">@ViewBag._Title</h1>
+@Html.Partial("_Messages")
 <div class="form-group">
     <form method="POST" enctype="multipart/form-data" action="@Url.Action("ImportAgencies")">
         @Html.ActionLink("Add Agency", "EditAgency", null, new { @class = "btn btn-primary" })

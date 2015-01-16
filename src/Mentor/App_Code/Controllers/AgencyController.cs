@@ -21,6 +21,7 @@ namespace Mentor
         public ActionResult ListAgencies()
         {
             var agencies = _agencies.Query().ToList();
+            ViewData["_Success"] = TempData["_Success"];
             return View("ListAgencies", agencies);
         }
 
@@ -46,12 +47,12 @@ namespace Mentor
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult ImportAgencies()
+        public ActionResult ImportAgencies(ImportAgencies model)
         {
             var file = Request.Files["InputFile"];
             if (file != null && file.InputStream != null && file.ContentLength > 0)
             {
-                _agencies.Import(file.InputStream);
+                TempData["_Success"] = "Imported " + model.Import(file.InputStream) + " Agencies";
             }
             return RedirectToAction("ListAgencies");
         }

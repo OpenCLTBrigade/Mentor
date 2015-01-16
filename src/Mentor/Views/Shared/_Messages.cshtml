@@ -1,0 +1,14 @@
+﻿@model dynamic
+@if (ViewBag.Error != null)
+{
+    var exception = ((Exception)ViewBag.Error).GetBaseException();
+    <div class="alert alert-danger">
+        @exception.Message
+    </div>
+}
+@if (ViewBag._Success != null)
+{
+    <div class="alert alert-success">
+        @((string)ViewBag._Success)
+    </div>
+}
