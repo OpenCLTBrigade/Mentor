@@ -170,11 +170,12 @@
         function loadLatLng(address) {
             if (!address || !address.Address) return false;
             var addrStr = [address.Address, address.CSZ].join(' ').trim();
+            if (console && console.log) console.log('GEOCODE: ' + addrStr);
             geocoder.geocode({ 'address': addrStr }, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     address.Latitude = results[0].geometry.location.lat();
                     address.Longitude = results[0].geometry.location.lng();
-                    if (address.Id) $.post('/Agency/Geocode', $.param(address)); //TODO: manage via Agency page
+                    if (address.Id) $.post('@Url.Action("Geocode", "Agency")', $.param(address)); //TODO: manage via Agency page
                 } else {
                     return false;
                 }
