@@ -8,6 +8,7 @@
         @Html.ActionLink("Add Agency", "EditAgency", null, new { @class = "btn btn-primary" })
         | <input type="file" name="InputFile" style="display:inline-block;" />
         @Html.SubmitButton("Import Agencies (xlsx)", new { @class = "btn btn-default" })
+        | @Html.ActionLink("Export Agencies (xlsx)", "ExportAgencies", null, new { @class = "btn btn-default" })
     </form>
 </div>
 <table class="table table-bordered table-hover table-striped">

@@ -56,6 +56,12 @@ namespace Mentor
             return RedirectToAction("ListAgencies");
         }
 
+        [AcceptVerbs(HttpVerbs.Get)]
+        public ActionResult ExportAgencies(ExportAgencies model)
+        {
+            return model.Download();
+        }
+
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Geocode(int id, decimal latitude, decimal longitude)
         {

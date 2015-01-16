@@ -6,13 +6,14 @@
 <%@ Import Namespace="SimpleInjector" %>
 <%@ Import Namespace="SimpleInjector.Integration.Web.Mvc" %>
 
-<script runat="server">
+<script RunAt="server">
     void Application_Start(Object sender, EventArgs args)
     {
         ConfigureContainer();
         ConfigureBundles(BundleTable.Bundles);
         ConfigureFilters(GlobalFilters.Filters);
         ConfigureRoutes(RouteTable.Routes);
+        ModelBinders.Binders.DefaultBinder = new DependencyResolverModelBinder();
     }
 
     protected void Application_AuthenticateRequest(Object sender, EventArgs e)
@@ -20,7 +21,7 @@
         var principal = UserService.GetPrincipal();
         if (principal == null)
             return;
-        
+
         Context.User = principal;
     }
 
