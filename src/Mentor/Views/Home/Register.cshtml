@@ -132,7 +132,7 @@
             </div>
             <div class="form-group">
                 <label>Expected length of commitment for youth and mentors:</label>
-                @Html.EditorFor(x => x.ExpectedCommitment, "_CodeSingleSelect", new { Type = "Agency.ExpectedCommitment", ViewBag.Codes })
+                @Html.EditorFor(x => x.ExpectedCommitment, "_CodeMultiSelect", new { Type = "Agency.ExpectedCommitment", ViewBag.Codes })
             </div>
             <div class="form-group">
                 <label>Expected frequency of mentoring activities:</label>
