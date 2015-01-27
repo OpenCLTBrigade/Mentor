@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/codeforcharlotte/mentor.png?label=ready&title=Ready)](https://waffle.io/codeforcharlotte/mentor)
 Mentor
 ======
 
