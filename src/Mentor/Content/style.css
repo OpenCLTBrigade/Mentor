@@ -147,3 +147,7 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+.agency .logo {
+    display: block; margin-bottom:1em;
+}

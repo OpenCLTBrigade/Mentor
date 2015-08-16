@@ -1,10 +1,8 @@
 Mentor
 ======
-
 A website to help mentors and mentees connect to mentoring agencies
 
 TODO
-* Agency login
 
 Public role
 * Agency register profile
@@ -20,3 +18,9 @@ Admin role
 * Manage agencies (list, edit, activate)
 * Manage form data (list, view)
 * Manage content pages (list, edit)
+
+LINKS
+* http://mentorcharlotte.nbsapps.com/
+* https://waffle.io/CodeForCharlotte/Mentor
+
+[![Stories in Ready](https://badge.waffle.io/codeforcharlotte/mentor.png?label=ready&title=Ready)](https://waffle.io/codeforcharlotte/mentor)

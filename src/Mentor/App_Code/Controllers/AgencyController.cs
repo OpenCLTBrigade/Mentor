@@ -33,6 +33,7 @@ namespace Mentor
             {
                 TryUpdateModel(agency);
                 _agencies.Save(agency);
+                _agencies.SaveLogo(Request.Files["LogoFile"], agency);
                 return RedirectToAction("ListAgencies");
             }
             ViewBag.Codes = _codes.Query().ToList();

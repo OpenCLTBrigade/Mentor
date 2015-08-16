@@ -4,7 +4,7 @@
 }
 <div>
     <h1 class="page-header">@ViewBag._Title</h1>
-    <form role="form" method="POST">
+    <form role="form" method="POST" enctype="multipart/form-data">
         <div class='form-group'>
             <label>Organization Name:</label>
             @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
@@ -205,6 +205,23 @@
                 <label>Is Active</label>
                 <div>@Html.CheckBoxFor(x => x.IsActive)</div>
             </div>
+            <div class="form-group">
+                <label>Agency Logo</label>
+                <div>
+                    <input type="file" name="LogoFile" />
+                    @if (Model.Logo != null) {
+                        <img src="@Model.Logo" />
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Agency Map Location</label>
+                <div>
+                    Latitude: @Html.TextBoxFor(x => x.Latitude)
+                    Longitude: @Html.TextBoxFor(x => x.Longitude)
+                    <button id="geocode" type="button" class="btn btn-default">Get Lat/Lon from Address</button>
+                </div>
+            </div>
         </fieldset>
         <div class="form-group">
             @Html.SubmitButton("Save Agency", new { @class = "btn btn-primary" })
@@ -213,3 +230,20 @@
         </div>
     </form>
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=&sensor=false"></script>
+<script type="text/javascript">
+    $(function () {
+        var geocoder = new google.maps.Geocoder();
+        $('#geocode').click(function () {
+            var addr = $('#Address').val() + ' ' + $('#City').val() + ' ' + $('#State').val() + ' ' + $('#ZipCode').val();
+            geocoder.geocode({ 'address': addr }, function(results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    $('#Latitude').val(results[0].geometry.location.lat());
+                    $('#Longitude').val(results[0].geometry.location.lng());
+                } else {
+                    alert(status + " " + JSON.stringify(results));
+                }
+            });
+        });
+    });
+</script>

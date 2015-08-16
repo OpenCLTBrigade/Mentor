@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Text.RegularExpressions;
 
 namespace Common
 {
@@ -35,6 +36,15 @@ namespace Common
             {
                 dict[key] = form[key];
             }
+        }
+
+        //REF: http://stackoverflow.com/a/2161706/366559
+        /// <summary>Create url-safe slug from article title</summary>
+        public static string Slug(this string title)
+        {
+            return string.IsNullOrWhiteSpace(title)
+                ? title
+                : Regex.Replace(title.ToLower(), @"[^A-Za-z0-9]+", "-");
         }
 
         //unit = 'M'=miles, 'K'=kilometers, 'N'=nautical miles

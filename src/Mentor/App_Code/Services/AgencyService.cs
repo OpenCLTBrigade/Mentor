@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Web;
+using System.Web.Hosting;
+using Common;
 
 namespace Mentor
 {
@@ -64,6 +68,11 @@ namespace Mentor
                 agency.User = user;
             }
 
+            if (!string.IsNullOrWhiteSpace(agency.Website) && !agency.Website.ToLower().StartsWith("http"))
+            {
+                agency.Website = "http://" + agency.Website;
+            }
+
             _db.Save(agency, agency.IsNew);
             _db.SaveChanges();
         }
@@ -83,6 +92,46 @@ namespace Mentor
             return _db.Agencies
                       .Where(x => x.User.Email == username)
                       .ToList();
+        }
+
+        private readonly static string[] IMAGE_EXTENSIONS = { "gif", "jpeg", "jpg", "png"};
+        public void SaveLogo(HttpPostedFileBase file, Agency agency)
+        {
+            if (file == null || file.ContentLength == 0 || file.InputStream == null || string.IsNullOrWhiteSpace(file.FileName))
+                return;
+
+            var ext = Path.GetExtension(file.FileName).ToLower().Trim('.');
+            if (!IMAGE_EXTENSIONS.Contains(ext))
+                return;
+
+            if (agency.Id == 0)
+                return;
+
+            //Delete existing logo
+            if (agency.Logo != null)
+            {
+                try
+                {
+                    var existingLogoPath = HostingEnvironment.MapPath(agency.Logo);
+                    if (existingLogoPath != null && File.Exists(existingLogoPath))
+                    {
+                        File.Delete(existingLogoPath);
+                    }
+                }
+                catch
+                {
+                    //ignore errors
+                }
+            }
+
+            agency.Logo = VirtualPathUtility.ToAbsolute("~/Content/logos/" + agency.Id + "-" + agency.Name.Slug() + "." + ext);
+
+            //Save Logo
+            var logoPath = HostingEnvironment.MapPath(agency.Logo);
+            Directory.CreateDirectory(Path.GetDirectoryName(logoPath));
+            file.SaveAs(logoPath);
+
+            _db.SaveChanges();
         }
     };
 }

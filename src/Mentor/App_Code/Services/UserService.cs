@@ -31,7 +31,7 @@ namespace Mentor
                 throw new ApplicationException("Invalid login");
 
             var roles = new string[0];
-            if (user.IsAdmin == true)
+            if (user.IsAdmin)
             {
                 roles = new[] { "Admin" };
             }

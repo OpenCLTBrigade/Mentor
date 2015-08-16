@@ -2,11 +2,90 @@
 @{
     ViewBag._Title = Model.Name;
 }
-<div>
+<div class="agency">
     <h1 class="page-header">@Model.Name</h1>
+    <div id="map-canvas" style='width:400px;height:400px;float:right;'></div>
+    @if (Model.Logo != null) {
+        <img src="@Model.Logo" class="logo" />
+    }
     <p>@Model.MissionStatement</p>
-    <div>@Model.Address</div>
-    <div>@Model.City, @Model.State @Model.ZipCode</div>
-    <div>@Model.Phone</div>
-    <div><a href="@Model.Website" target="_blank">@Model.Website</a></div>
+    <p>@Model.Address <br/> @Model.City, @Model.State @Model.ZipCode <br/> @Model.Phone</p>
+    <p><a href="@Model.Website" target="_blank">@Model.Website</a></p>
+    @if (User.IsInRole("Admin")) {
+        <p>@Html.ActionLink("Edit Agency Profile", "EditAgency", "Agency", new {Model.Id}, new {@class="btn btn-warning"})</p>
+    }
 </div>
+
+@if (Model.Longitude != null && Model.Latitude != null) {
+    <script src="https://maps.googleapis.com/maps/api/js?key=&sensor=false"></script>
+    <script type="text/javascript">
+        var geocoder = null;
+        (function(google) {
+            var agencies = @Html.Raw(Json.Encode(new[] {AgencySearch.Transform(Model)}));
+            var map, markers = [], infoWindow;
+            google.maps.event.addDomListener(window, 'load', initializeMap);
+
+            function initializeMap() {
+                infoWindow = new google.maps.InfoWindow();
+                var mapOptions = {
+                    center: new google.maps.LatLng(35.222431, -80.837611),
+                    zoom: 12,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+                loadMarkers();
+            }
+
+            function loadMarkers() {
+                if (!map) return;
+                var bounds = new google.maps.LatLngBounds();
+                $.each(agencies, function(i, item) {
+                    var marker2 = new google.maps.Marker({
+                        map: map,
+                        position: new google.maps.LatLng(item.Latitude, item.Longitude),
+                        title: item.Name
+                    });
+                    addMarker(marker2, item, bounds);
+                });
+                if (markers.length === 1) {
+                    map.setCenter(markers[0].getPosition());
+                }
+            }
+
+            function addMarker(marker, address, bounds) {
+                markers.push(marker);
+                google.maps.event.addListener(marker, 'click', function() {
+                    infoWindow.setContent(buildAddressInfo(address));
+                    infoWindow.open(map, marker);
+                });
+                bounds.extend(marker.position);
+            }
+
+            function buildAddressInfo(address) {
+                if (!address.Name) return 'Address: ' + address.Address; //address they entered
+                var html = "<div style='font-size:smaller;'>";
+                html += "<div style='font-weight:bold;'>" + address.Name + "</div>";
+                if (address.Address) {
+                    html += "<div>" + address.Address + "</div>";
+                    html += "<div>" + address.CSZ;
+                    html += " | <a href='https://www.google.com/maps?" + $.param({
+                        q: [address.Address, address.CSZ].join(' ')
+                    }) + "' target='_blank'>Map</a></div>";
+                }
+                if (address.Phone) {
+                    html += "<div>" + address.Phone + "</div>";
+                }
+                if (address.Website) {
+                    html += "<div><a href='" + address.Website + "' target='_blank'>Website</a>";
+                }
+                html += "</div>";
+                if (address.Distance) {
+                    html += "<div>Distance: " + parseFloat(address.Distance.toFixed(1)) + " miles</div>";
+                }
+                html += "</div>";
+                return html;
+            }
+
+        })(google);
+    </script>
+}

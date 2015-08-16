@@ -80,7 +80,7 @@ namespace Mentor
         public MentorDbMigrationConfiguration()
         {
             AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
+            AutomaticMigrationDataLossAllowed = false;
         }
 
         protected override void Seed(MentorDb context)
@@ -111,8 +111,8 @@ namespace Mentor
                     new Code { Id=21, Type="Agency.MenteeAge", Value="Elementary school", Label="approx. 5-12 years old", Seq=1 },
                     new Code { Id=22, Type="Agency.MenteeAge", Value="Middle school", Label="approx. 12-15 years old", Seq=2 },
                     new Code { Id=23, Type="Agency.MenteeAge", Value="High school", Label="approx. 15-18 years old", Seq=3 },
-                    new Code { Id=24, Type="Agency.MenteeGender", Value="Male", Label="", Seq=1 },
-                    new Code { Id=25, Type="Agency.MenteeGender", Value="Female", Label="", Seq=2 },
+                    new Code { Id=24, Type="Agency.MenteeGender", Value="Male", Label="Male", Seq=1 },
+                    new Code { Id=25, Type="Agency.MenteeGender", Value="Female", Label="Female", Seq=2 },
                     new Code { Id=26, Type="Agency.ReferralMethod", Value="Self", Label="Self-referral", Seq=1 },
                     new Code { Id=27, Type="Agency.ReferralMethod", Value="Parent", Label="Parent/guardian", Seq=2 },
                     new Code { Id=28, Type="Agency.ReferralMethod", Value="SocialWorker", Label="Social Worker", Seq=3 },

@@ -104,6 +104,9 @@ namespace Mentor
         [DecimalPrecision(9, 6)]
         public decimal? Longitude { get; set; }
 
+        [StringLength(100)]
+        public string Logo { get; set; }
+
         [NotMapped]
         public string[] ProgramType
         {
