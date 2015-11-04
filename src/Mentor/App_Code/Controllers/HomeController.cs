@@ -87,6 +87,11 @@ namespace Mentor
                 {
                     TryUpdateModel(agency);
                     _agencies.Save(agency, Request.Form["Username"], Request.Form["Password"]);
+                    new RegistrationEmail
+                    {
+                        Agency = agency,
+                        BaseUrl = Request.Url.Scheme + "://" + Request.Url.Authority,
+                    }.Send();
                     return Content("Registration successful " + agency.Id);
                 }
                 catch (Exception ex)
